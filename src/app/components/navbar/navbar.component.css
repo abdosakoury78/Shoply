@@ -1,0 +1,229 @@
+/* logo */
+.navbar-brand {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  letter-spacing: -.03em;
+  transition: color .3s;
+}
+
+.navbar-brand:hover {
+  color: var(--main-color-dark);
+}
+
+/* ========================================= */
+/* links style */
+.navbar .nav-link {
+  color: var(--ink);
+  font-weight: 500;
+  transition: .3s;
+}
+
+.nav-main-link {
+  position: relative;
+  padding: .5rem .9rem !important;
+}
+
+
+.nav-main-link::after {
+  content: "";
+  position: absolute;
+
+  left: .9rem;
+  right: .9rem;
+  bottom: 0;
+
+  height: 2px;
+  border-radius: 10px;
+
+  background: var(--main-color);
+
+  transform: scaleX(0);
+  transform-origin: right;
+
+  transition: transform .3s ease;
+}
+
+
+.nav-main-link:hover::after,
+.nav-main-link.navbar-active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-main-link:hover {
+  color: var(--main-color-dark);
+}
+
+
+/* ========================================= */
+/* Wishlist & Cart */
+.nav-action {
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+
+  padding: .55rem .9rem !important;
+
+  border-radius: 999px;
+
+  transition: .3s;
+}
+
+.nav-action:hover,
+.nav-action.action-active {
+  color: var(--main-color-dark) !important;
+}
+
+.nav-action i {
+  font-size: 1rem;
+}
+
+
+
+.custom-badge {
+
+  position: absolute;
+
+  top: -4px;
+  right: -4px;
+
+  background: var(--main-color-dark);
+
+  color: white;
+
+  border: 2px solid white;
+
+  font-size: .68rem;
+
+  min-width: 18px;
+}
+
+
+
+/* Login btn */
+.btn-login {
+
+  border: 2px solid var(--main-color);
+
+  color: var(--main-color-dark);
+
+  border-radius: 999px;
+
+  padding: .5rem 1.4rem;
+
+  font-weight: 600;
+
+  transition: .3s;
+}
+
+
+.btn-login:hover {
+
+  background: var(--main-color);
+
+  color: white;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 18px rgba(101, 127, 7, .18);
+}
+
+
+/* Mobile style part */
+.navbar-toggler {
+  border-color: #ddd;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 .2rem var(--main-color-light);
+}
+
+
+@media (max-width: 991.98px) {
+
+  .navbar-collapse {
+    margin-top: 1rem;
+  }
+
+  .navbar-nav {
+    align-items: stretch;
+    gap: .4rem;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  /* Left navigation links */
+  .nav-main-link {
+    display: block;
+    width: 100%;
+
+    padding: .85rem 1rem !important;
+
+    text-align: center;
+
+    border-radius: 12px;
+  }
+
+  .nav-main-link::after {
+    display: none;
+  }
+
+  .nav-main-link:hover,
+  .nav-main-link.navbar-active {
+    background: var(--main-color-light);
+    color: var(--main-color-dark);
+  }
+
+  /* Wishlist & Cart */
+  .nav-action {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    padding: .9rem 1rem !important;
+
+    border-radius: 12px;
+
+    background: #f8f9fa;
+  }
+
+  .nav-action:hover,
+  .nav-action.action-active {
+    background: var(--main-color-light);
+  }
+
+
+  .custom-badge {
+    position: static;
+    margin-left: .4rem;
+  }
+
+  /* Login button */
+  .btn-login {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    margin-top: .8rem;
+
+    padding: .85rem;
+
+    border-radius: 12px;
+  }
+
+
+  .navbar-nav:first-child {
+    margin-bottom: .8rem;
+  }
+}
