@@ -1,1 +1,68 @@
-<p>brands works!</p>
+<div class="container py-5">
+  <div class="row g-4">
+
+    @for (brand of brands(); track brand._id) {
+      <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+        <div class="card h-100 shadow-sm border-0 text-center">
+
+          <div class="p-4">
+            <img
+              [src]="brand.image"
+              [alt]="brand.name"
+              class="img-fluid"
+            >
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title fw-bold mb-2">
+              {{ brand.name }}
+            </h5>
+
+            <p class="text-muted small mb-0">
+              {{ brand.slug }}
+            </p>
+          </div>
+
+        </div>
+      </div>
+    }
+
+  </div>
+</div>
+
+
+<nav class="d-flex justify-content-center mt-5">
+  <ul class="pagination">
+
+    <li class="page-item" [class.disabled]="currentPage() === 1">
+      <button
+        class="page-link"
+        (click)="changePage(currentPage() - 1)">
+        Previous
+      </button>
+    </li>
+
+    @for (page of pages(); track page) {
+      <li
+        class="page-item"
+        [class.active]="page === currentPage()">
+
+        <button
+          class="page-link"
+          (click)="changePage(page)">
+          {{ page }}
+        </button>
+
+      </li>
+    }
+
+    <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+      <button
+        class="page-link"
+        (click)="changePage(currentPage() + 1)">
+        Next
+      </button>
+    </li>
+
+  </ul>
+</nav>

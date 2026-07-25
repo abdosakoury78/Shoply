@@ -1,1 +1,238 @@
-<p>home works!</p>
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center min-vh-100">
+
+      <div class="col-lg-6">
+        <span class="hero-badge">
+          New Season Arrival
+        </span>
+
+        <h1 class="hero-title mt-3">
+          Elevate Your
+          <span>Personal Style</span>
+        </h1>
+
+        <p class="hero-text my-4">
+          Discover our curated seasonal collection that blends timeless elegance
+          with modern comfort. Crafted for those who appreciate premium quality
+          and exceptional design.
+        </p>
+
+        <div class="d-flex flex-wrap gap-3">
+          <button
+          routerLink="/products"
+           class="btn btn-success btn-lg px-4">
+            Shop Now
+          </button>
+
+          <button 
+          routerLink="/products"
+          class="btn btn-outline-dark btn-lg px-4">
+            Explore
+          </button>
+        </div>
+      </div>
+
+      <div class="col-lg-6 text-center mt-5 mt-lg-0">
+
+        <img
+          src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=900"
+          class="img-fluid hero-image"
+          alt="Fashion">
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+
+  <div>
+    <span class="text-success fw-semibold text-uppercase">
+      Categories
+    </span>
+
+    <h2 class="display-5 fw-bold mt-2">
+      Shop By Category
+    </h2>
+
+    <p class="text-muted mb-0">
+      Explore our carefully selected collections.
+    </p>
+  </div>
+
+  <a
+    routerLink="/categories"
+    class="view-all-link">
+    View All
+    <i class="bi bi-arrow-right-short"></i>
+  </a>
+
+</div>
+
+    <div class="row g-4">
+
+      @for(category of categories(); track category._id){
+
+      <div class="col-6 col-md-4 col-lg-3">
+
+        <div class="category-card">
+
+          <img
+            [src]="category.image"
+            [alt]="category.name"
+            class="img-fluid">
+
+          <div class="category-overlay">
+
+            <h5>
+              {{category.name}}
+            </h5>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
+    
+
+  </div>
+
+
+</section>
+
+<section class="py-5 bg-light">
+   
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center mb-5">
+
+    <div>
+
+        <span class="text-success fw-semibold">
+            Featured Products
+        </span>
+
+        <h2 class="display-5 fw-bold mb-2">
+            Trending Collection
+        </h2>
+
+         <p class="text-muted mb-0">
+            Explore our Products.
+        </p>
+
+    </div>
+
+    <a
+        routerLink="/products"
+        class="view-all-link">
+        View All
+        <i class="bi bi-arrow-right-short"></i>
+    </a>
+
+</div>
+
+        <div class="row g-4">
+
+            @for(product of products();track product._id){
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            [src]="product.imageCover"
+                            [alt]="product.title">
+
+                        <span class="badge bg-success">
+                            {{product.category.name}}
+                        </span>
+
+                    </div>
+
+                    <div class="product-body">
+
+                        <h5>
+
+                            {{product.title}}
+
+                        </h5>
+
+                        <p>
+
+                            {{product.description | slice:0:70}}...
+
+                        </p>
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <strong>
+
+                                {{product.price}} EGP
+
+                            </strong>
+
+                            <span class="text-warning">
+
+                                ★ {{product.ratingsAverage}}
+
+                            </span>
+
+                        </div>
+
+                        <button class="btn btn-success w-100 mt-3">
+
+                            Add To Cart
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            }
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer class="footer pt-5 pb-3">
+
+    <div class="container">
+        <div class="d-md-flex justify-content-between align-items-center text-center">
+
+            <p class="mb-2 mb-md-0">
+                © 2026 ShopEase. All Rights Reserved.
+            </p>
+
+            <div>
+
+                <img src="https://img.icons8.com/color/48/visa.png" width="40">
+
+                <img src="https://img.icons8.com/color/48/mastercard.png" width="40">
+
+                <img src="https://img.icons8.com/color/48/paypal.png" width="40">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
