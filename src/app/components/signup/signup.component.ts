@@ -14,6 +14,8 @@ export class SignupComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   errorMessage = signal<string>('');
+  showPassword = signal<boolean>(false);
+  showRePassword = signal<boolean>(false);
 
   signupForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
@@ -25,7 +27,7 @@ export class SignupComponent {
     rePassword: new FormControl('', [Validators.required])
   }, { validators: this.passwordsMatch });
 
-  passwordsMatch(group : AbstractControl) {
+  passwordsMatch(group: AbstractControl) {
     const password = group.get('password')?.value;
     const rePassword = group.get('rePassword')?.value;
     return password === rePassword ? null : { passwordsMismatch: true };
