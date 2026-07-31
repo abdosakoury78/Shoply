@@ -35,6 +35,7 @@ export class SigninComponent {
       next: (response) => {
         if (response.token) {
           localStorage.setItem('userToken', response.token);
+          this.authService.saveUserData()
         }
         this.router.navigate(['/home']);
       },

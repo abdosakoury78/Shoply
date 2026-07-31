@@ -10,18 +10,20 @@ import { SignupComponent } from './components/signup/signup.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { CartComponent } from './components/cart/cart.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { authGuardGuard } from './guards/auth-guard-guard';
+import { isLoggedGuard } from './guards/is-logged-guard';
 
 
 export const routes: Routes = [
     {
-        path: "", component: AuthLayoutComponent, children: [
+        path: "", component: AuthLayoutComponent, canActivate:[isLoggedGuard],children: [
             { path: "", redirectTo:"signin" , pathMatch:"full" },
             { path: "signin", component: SigninComponent, title: "Sign In" },
             { path: "signup", component: SignupComponent, title: "Sign Up" },
         ]
     },
     {
-        path: "", component: MainLayoutComponent, children: [
+        path: "", component: MainLayoutComponent,canActivate:[authGuardGuard] ,children: [
             { path: "", redirectTo:"home" , pathMatch:"full" },
             { path: "home", component: HomeComponent, title: 'Home' },
             { path: "categories", component: CategoriesComponent, title: "Categories" },

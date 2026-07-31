@@ -5,6 +5,7 @@ import { ProductsService } from '../../Services/products.service';
 import { Product } from '../../Interfaces/products.interface';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,9 @@ export class HomeComponent {
 
    private readonly CategoriesService = inject(CategoriesService);
     private readonly ProductsService = inject(ProductsService);
+   constructor(private token:AuthService){
+    token.saveUserData()
+   }
 
 
   categories = signal<category[]>([]);
