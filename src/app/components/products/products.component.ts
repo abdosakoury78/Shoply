@@ -2,6 +2,7 @@ import { Component, computed, inject, OnInit, signal, Signal } from '@angular/co
 import { ProductsService } from '../../Services/products.service';
 import { Product } from '../../Interfaces/products.interface';
 import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -11,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductsComponent implements OnInit {
    private readonly ProductsService = inject(ProductsService);
+   private readonly router = inject(Router);
 
   allProducts = signal<Product[]>([]);
 
@@ -36,12 +38,12 @@ export class ProductsComponent implements OnInit {
     this.ProductsService.getAllProducts().subscribe({
       next: ({ data}) => {
         this.allProducts.set(data)
-        
+
       },
       error: ({err}) =>{
-        console.log(err);  
+        console.log(err);
       }
-      
+
     })
   }
 
@@ -55,5 +57,9 @@ export class ProductsComponent implements OnInit {
       behavior: 'smooth'
     });
   }
-  
+
+  goToProduct(productId: string) {
+    this.router.navigate(['/products', productId]);
+  }
+
 }

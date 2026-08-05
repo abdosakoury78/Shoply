@@ -2,6 +2,10 @@ export interface ProductsResponse {
   data: Product[];
 }
 
+export interface ProductResponse {
+  data: Product;
+}
+
 export interface Product {
     sold: number;
     images: string[];
