@@ -45,7 +45,10 @@
 
                     </div>
 
-                    <button class="btn btn-cart">
+                    <button
+                    (click)="addToCart(product._id)"
+                    class="btn btn-cart"
+                    >
 
                         <i class="fa-solid fa-cart-shopping me-2"></i>
 
@@ -56,6 +59,7 @@
                 </div>
 
             </div>
+
 
         </div>
 

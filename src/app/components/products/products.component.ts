@@ -2,6 +2,8 @@ import { Component, computed, inject, OnInit, signal, Signal } from '@angular/co
 import { ProductsService } from '../../Services/products.service';
 import { Product } from '../../Interfaces/products.interface';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../Services/cart.service';
+import Swal from 'sweetalert2';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -12,6 +14,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
    private readonly ProductsService = inject(ProductsService);
+   private readonly CartService = inject(CartService);
    private readonly router = inject(Router);
 
   allProducts = signal<Product[]>([]);
@@ -46,6 +49,36 @@ export class ProductsComponent implements OnInit {
 
     })
   }
+
+addToCart(productId: string){
+
+  this.CartService.addProductToCart(productId).subscribe({
+
+    next: (res) => {
+
+      console.log(res);
+       Swal.fire({
+        icon: 'success',
+        title: 'Product Added To Cart',
+        timer: 1500,
+        showConfirmButton: false
+      });
+
+    },
+
+    error: (err) => {
+
+      console.log(err);
+       Swal.fire({
+        icon: 'error',
+        title: err.error.message
+      });
+
+    }
+
+  });
+
+}
 
    changePage(page: number) {
     if (page < 1 || page > this.totalPages()) return;

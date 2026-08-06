@@ -1,1 +1,181 @@
-<p>cart works!</p>
+<section class="cart-page py-5">
+
+    <div class="container" style="max-width:1200px;">
+
+        <div class="mb-5">
+
+            <h1 class="cart-title">
+                Shopping Cart
+            </h1>
+
+            <p class="cart-subtitle">
+                {{ cartItems()?.products?.length }} item(s) in your cart.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-8">
+
+                @for(item of cartItems()?.products; track item._id){
+
+                <div class="cart-card">
+
+                    <button
+                    (click)="removeCartItem(item.product._id)"
+                    class="remove-btn">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+
+                    <div class="d-flex align-items-center">
+
+                        <img
+                            [src]="item.product.imageCover"
+                            [alt]="item.product.title"
+                            class="cart-image">
+
+                        <div class="flex-grow-1 ms-4">
+
+                            <span class="category">
+                                {{ item.product.category.name }}
+                            </span>
+
+                            <h3 class="product-title">
+                                {{ item.product.title }}
+                            </h3>
+
+                            <p class="product-info">
+                                Rating:
+                                {{ item.product.ratingsAverage }}
+                                ★
+                            </p>
+
+                            <div class="quantity-box">
+
+                                <button
+                                (click)="updateQuantity(item.product._id , item.count-1)"
+                                >-</button>
+
+                                <span>{{ item.count}}</span>
+
+                                <button
+                                (click)="updateQuantity(item.product._id , item.count+1)"
+                                >+</button>
+
+                            </div>
+
+                        </div>
+
+                        <h2 class="price">
+                            {{ item.price }} EGP
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                }
+                @if(cartItems()?.products?.length){
+                    <button class="btn btn-outline-danger" (click)="clearCart()">
+                        Clear Cart
+                    </button>
+                }
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="summary-card">
+
+                    <h2>
+                        Order Summary
+                    </h2>
+
+                    <hr>
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal ({{ cartItems()?.products?.length }} item(s))
+                        </span>
+
+                        <span>
+                            {{ cartItems()?.totalCartPrice }} EGP
+                        </span>
+
+                    </div>
+
+                    <div class="summary-row">
+
+                        <span>
+                            Shipping
+                        </span>
+
+                        <span class="text-success fw-bold">
+                            Free
+                        </span>
+
+                    </div>
+
+                    <div class="summary-row">
+
+                        <span>
+                            Tax
+                        </span>
+
+                        <span>
+                            Calculated at checkout
+                        </span>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="summary-total">
+
+                        <div>
+
+                            <h5>Total</h5>
+
+                        </div>
+
+                        <div class="text-end">
+
+                            <h2>
+                                {{ cartItems()?.totalCartPrice }} EGP
+                            </h2>
+
+                            <small>
+                                Inclusive of VAT
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-success checkout-btn">
+
+                        Proceed to Checkout
+
+                        <i class="bi bi-arrow-right ms-2"></i>
+
+                    </button>
+
+                    <div class="secure">
+
+                        <i class="bi bi-shield-lock-fill me-2"></i>
+
+                        Secure Checkout
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
