@@ -2,6 +2,9 @@ import { Component, computed, inject, OnInit, signal, Signal } from '@angular/co
 import { ProductsService } from '../../Services/products.service';
 import { Product } from '../../Interfaces/products.interface';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../Services/cart.service';
+import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products',
@@ -11,6 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductsComponent implements OnInit {
    private readonly ProductsService = inject(ProductsService);
+   private readonly CartService = inject(CartService);
 
   allProducts = signal<Product[]>([]);
 
@@ -36,6 +40,8 @@ export class ProductsComponent implements OnInit {
     this.ProductsService.getAllProducts().subscribe({
       next: ({ data}) => {
         this.allProducts.set(data)
+        console.log(data);
+        
         
       },
       error: ({err}) =>{
@@ -44,6 +50,36 @@ export class ProductsComponent implements OnInit {
       
     })
   }
+
+addToCart(productId: string){
+
+  this.CartService.addProductToCart(productId).subscribe({
+
+    next: (res) => {
+
+      console.log(res);
+       Swal.fire({
+        icon: 'success',
+        title: 'Product Added To Cart',
+        timer: 1500,
+        showConfirmButton: false
+      });
+
+    },
+
+    error: (err) => {
+
+      console.log(err);
+       Swal.fire({
+        icon: 'error',
+        title: err.error.message
+      });
+
+    }
+
+  });
+
+}
 
    changePage(page: number) {
     if (page < 1 || page > this.totalPages()) return;
