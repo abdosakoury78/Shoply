@@ -12,6 +12,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { authGuardGuard } from './guards/auth-guard-guard';
 import { isLoggedGuard } from './guards/is-logged-guard';
+import { ProductComponent } from './components/product/product.component';
 
 
 export const routes: Routes = [
@@ -29,6 +30,7 @@ export const routes: Routes = [
             { path: "categories", component: CategoriesComponent, title: "Categories" },
             { path: "brands", component: BrandsComponent, title: "Brands" },
             { path: "products", component: ProductsComponent, title: "Products" },
+            {path: "products/:id", component: ProductComponent, title: "Products" },
             { path: "cart", component: CartComponent, title: "Cart" },
             { path: "wishlist", component:WishlistComponent, title: "WishList" },
         ]

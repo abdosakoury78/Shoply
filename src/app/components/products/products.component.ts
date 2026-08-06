@@ -3,8 +3,8 @@ import { ProductsService } from '../../Services/products.service';
 import { Product } from '../../Interfaces/products.interface';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../Services/cart.service';
-import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class ProductsComponent implements OnInit {
    private readonly ProductsService = inject(ProductsService);
    private readonly CartService = inject(CartService);
+   private readonly router = inject(Router);
 
   allProducts = signal<Product[]>([]);
 
@@ -40,14 +41,12 @@ export class ProductsComponent implements OnInit {
     this.ProductsService.getAllProducts().subscribe({
       next: ({ data}) => {
         this.allProducts.set(data)
-        console.log(data);
-        
-        
+
       },
       error: ({err}) =>{
-        console.log(err);  
+        console.log(err);
       }
-      
+
     })
   }
 
@@ -91,5 +90,9 @@ addToCart(productId: string){
       behavior: 'smooth'
     });
   }
-  
+
+  goToProduct(productId: string) {
+    this.router.navigate(['/products', productId]);
+  }
+
 }

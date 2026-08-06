@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { ProductsResponse } from '../Interfaces/products.interface';
+import { Product, ProductResponse, ProductsResponse } from '../Interfaces/products.interface';
 
 @Service()
 export class ProductsService {
@@ -12,5 +12,9 @@ export class ProductsService {
 
     getAllProducts(): Observable<ProductsResponse>{
         return this.http.get<ProductsResponse>(`${this.apiUrl}/products`);
+    }
+
+    getProductById(id : string) {
+        return this.http.get<ProductResponse>(`${this.apiUrl}/products/${id}`);
     }
 }

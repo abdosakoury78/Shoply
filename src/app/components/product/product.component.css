@@ -1,0 +1,360 @@
+.loading{
+    min-height:70vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* ========================= */
+
+.product-image{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:2rem;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.product-image img{
+
+    width:100%;
+    max-height:500px;
+    object-fit:contain;
+
+    transition:.35s;
+}
+
+.product-image:hover img{
+
+    transform:scale(1.05);
+}
+
+/* ========================= */
+
+.product-category{
+
+    display:inline-block;
+
+    background:var(--main-color-light);
+
+    color:var(--main-color-dark);
+
+    padding:.45rem 1rem;
+
+    border-radius:999px;
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    margin-bottom:1rem;
+}
+
+.product-title{
+
+    font-size:2.2rem;
+
+    font-weight:700;
+
+    color:#222;
+
+    margin-bottom:1rem;
+}
+
+.product-description{
+
+    color:#666;
+
+    line-height:1.8;
+
+    margin-bottom:2rem;
+}
+
+/* ========================= */
+
+.product-meta{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:1rem;
+
+    margin-bottom:1rem;
+}
+
+.price{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:var(--main-color-dark);
+}
+
+.price span{
+
+    font-size:1rem;
+
+    color:#777;
+
+    margin-left:.25rem;
+}
+
+.rating{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:.45rem;
+
+    font-weight:600;
+}
+
+.rating i{
+
+    color:#ffc107;
+}
+
+.rating small{
+
+    color:#777;
+}
+
+/* ========================= */
+
+.stock{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:.5rem;
+
+    background:#eef8ef;
+
+    color:#2e7d32;
+
+    padding:.55rem 1rem;
+
+    border-radius:999px;
+
+    font-weight:600;
+}
+
+/* ========================= */
+
+.quantity{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:1rem;
+}
+
+.qty-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:var(--main-color);
+
+    color:#fff;
+
+    transition:.3s;
+}
+
+.qty-btn:hover{
+
+    background:var(--main-color-dark);
+
+    transform:scale(1.08);
+}
+
+.quantity span{
+
+    font-size:1.3rem;
+
+    font-weight:700;
+
+    width:30px;
+
+    text-align:center;
+}
+
+/* ========================= */
+
+.action-buttons{
+
+    display:flex;
+
+    gap:1rem;
+}
+
+.btn-cart{
+
+    flex:1;
+
+    background:var(--main-color);
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:.9rem;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.btn-cart:hover{
+
+    background:var(--main-color-dark);
+
+    transform:translateY(-2px);
+}
+
+.btn-heart{
+
+    width:58px;
+
+    height:58px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border:2px solid #ddd;
+
+    border-radius:12px;
+
+    background:#fff;
+
+    transition:.3s;
+}
+
+.btn-heart:hover{
+
+    border-color:#dc3545;
+
+    color:#dc3545;
+
+    transform:translateY(-2px);
+}
+
+
+.btn-back{
+
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+
+    padding:.65rem 1.2rem;
+
+    border:2px solid var(--main-color);
+
+    background:#fff;
+    color:var(--main-color-dark);
+
+    border-radius:999px;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.btn-back:hover{
+
+    background:var(--main-color);
+
+    color:#fff;
+
+    transform:translateX(-4px);
+}
+
+.btn-back i{
+
+    transition:.3s;
+}
+
+.btn-back:hover i{
+
+    transform:translateX(-3px);
+}
+
+
+/* ========================= */
+
+@media (max-width:992px){
+
+    .product-title{
+
+        font-size:1.8rem;
+
+        text-align:center;
+    }
+
+    .product-category{
+
+        display:block;
+
+        width:max-content;
+
+        margin-inline:auto;
+    }
+
+    .product-description{
+
+        text-align:center;
+    }
+
+    .product-meta{
+
+        justify-content:center;
+    }
+
+    .stock{
+
+        display:flex;
+
+        width:max-content;
+
+        margin-inline:auto;
+    }
+
+    .quantity{
+
+        justify-content:center;
+    }
+
+    .action-buttons{
+
+        flex-direction:column;
+    }
+
+    .btn-heart{
+
+        width:100%;
+    }
+}

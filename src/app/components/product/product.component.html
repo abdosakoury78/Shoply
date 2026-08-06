@@ -1,0 +1,145 @@
+
+@if (product) {
+
+<div class="container py-5">
+    <div class="mb-4">
+
+        <button
+            class="btn btn-back"
+            (click)="goBack()">
+
+            <i class="fa-solid fa-arrow-left me-2"></i>
+            Back
+
+        </button>
+
+    </div>
+    <div class="row align-items-center g-5">
+
+        <!-- Product Image -->
+        <div class="col-lg-5">
+
+            <div class="product-image">
+
+                <img
+                    [src]="product.imageCover"
+                    [alt]="product.title"
+                    class="img-fluid">
+
+            </div>
+
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-lg-7">
+
+            <span class="product-category">
+                {{ product.category.name }}
+            </span>
+
+            <h1 class="product-title">
+                {{ product.title }}
+            </h1>
+
+            <p class="product-description">
+                {{ product.description }}
+            </p>
+
+            <div class="product-meta">
+
+                <div class="price">
+
+                    {{ product.price }}
+
+                    <span>EGP</span>
+
+                </div>
+
+                <div class="rating">
+
+                    <i class="fa-solid fa-star"></i>
+
+                    {{ product.ratingsAverage }}
+
+                    <small>
+                        ({{ product.ratingsQuantity }} Reviews)
+                    </small>
+
+                </div>
+
+            </div>
+
+            <div class="stock">
+
+                <i class="fa-solid fa-box-open"></i>
+
+                {{ product.quantity }} In Stock
+
+            </div>
+
+            <!-- Quantity -->
+
+            <div class="quantity mt-4">
+
+                <button
+                    class="qty-btn"
+                    (click)="decreaseQuantity()"
+                    [disabled]="quantity === 1"
+                    >
+
+                    <i class="fa-solid fa-minus"></i>
+
+                </button>
+
+                <span>{{ quantity }}</span>
+
+                <button
+                    class="qty-btn"
+                    (click)="increaseQuantity()"
+                    [disabled]="quantity >= product.quantity">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </button>
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div class="action-buttons mt-4">
+
+                <button
+                    class="btn btn-cart"
+                    (click)="addToCart(product)">
+
+                    <i class="fa-solid fa-cart-shopping me-2"></i>
+
+                    Add To Cart
+
+                </button>
+
+                <button class="btn btn-heart">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+}
+
+@else {
+
+<div class="loading">
+
+    <div class="spinner-border text-success"></div>
+
+</div>
+
+}
