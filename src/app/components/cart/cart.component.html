@@ -1,10 +1,15 @@
-<section class="cart-page py-5">
+<div class="cart-page">
 
-    <div class="container" style="max-width:1200px;">
+    <div class="container py-5" style="max-width: 1200px;">
 
-        <div class="mb-5">
+        <!-- Header -->
+        <div class="cart-header mb-5">
 
-            <h1 class="cart-title">
+            <span class="cart-badge">
+                Your Selection
+            </span>
+
+            <h1 class="cart-title mt-2">
                 Shopping Cart
             </h1>
 
@@ -15,27 +20,67 @@
         </div>
 
         <div class="row g-4">
+            <div class="col-lg-12">
+                <!-- Empty Cart -->
+                @if(!cartItems()?.products?.length) {
 
+                <div class="empty-cart">
+
+                    <i class="bi bi-bag-x"></i>
+
+                    <h3>
+                        Your cart is empty
+                    </h3>
+
+                    <p>
+                        Discover something beautiful and add it to your cart.
+                    </p>
+
+                    <a
+                        routerLink="/products"
+                        class="btn bg-main text-white">
+
+                        Continue Shopping
+
+                    </a>
+
+                </div>
+
+                }
+
+            </div>
+            <!-- Cart Items -->
             <div class="col-lg-8">
 
-                @for(item of cartItems()?.products; track item._id){
+                @for(item of cartItems()?.products; track item._id) {
 
                 <div class="cart-card">
 
+                    <!-- Remove -->
                     <button
-                    (click)="removeCartItem(item.product._id)"
-                    class="remove-btn">
+                        type="button"
+                        class="remove-btn"
+                        (click)="removeCartItem(item.product._id, item.count)"
+                        aria-label="Remove product">
+
                         <i class="bi bi-x-lg"></i>
+
                     </button>
 
-                    <div class="d-flex align-items-center">
+                    <div class="cart-content">
 
-                        <img
-                            [src]="item.product.imageCover"
-                            [alt]="item.product.title"
-                            class="cart-image">
+                        <!-- Product Image -->
+                        <div class="cart-image-wrapper">
 
-                        <div class="flex-grow-1 ms-4">
+                            <img
+                                [src]="item.product.imageCover"
+                                [alt]="item.product.title"
+                                class="cart-image">
+
+                        </div>
+
+                        <!-- Product Information -->
+                        <div class="cart-details">
 
                             <span class="category">
                                 {{ item.product.category.name }}
@@ -45,137 +90,201 @@
                                 {{ item.product.title }}
                             </h3>
 
-                            <p class="product-info">
-                                Rating:
-                                {{ item.product.ratingsAverage }}
-                                ★
-                            </p>
+                            <div class="product-rating">
 
+                                <i class="bi bi-star-fill"></i>
+
+                                <span>
+                                    {{ item.product.ratingsAverage }}
+                                </span>
+
+                            </div>
+
+                            <!-- Quantity -->
                             <div class="quantity-box">
 
                                 <button
-                                (click)="updateQuantity(item.product._id , item.count-1)"
-                                >-</button>
+                                    type="button"
+                                    (click)="updateQuantity(
+                                        item.product._id,
+                                        item.count - 1,
+                                        'decrease'
+                                    )">
 
-                                <span>{{ item.count}}</span>
+                                    <i class="bi bi-dash"></i>
+
+                                </button>
+
+                                <span>
+                                    {{ item.count }}
+                                </span>
 
                                 <button
-                                (click)="updateQuantity(item.product._id , item.count+1)"
-                                >+</button>
+                                    type="button"
+                                    (click)="updateQuantity(
+                                        item.product._id,
+                                        item.count + 1,
+                                        'increase'
+                                    )">
+
+                                    <i class="bi bi-plus"></i>
+
+                                </button>
 
                             </div>
 
                         </div>
 
-                        <h2 class="price">
-                            {{ item.price }} EGP
+                        <!-- Price -->
+                        <div class="cart-price">
+
+                            <span>
+                                Price
+                            </span>
+
+                            <strong>
+                                {{ item.price }} EGP
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                }
+
+
+                <!-- Clear Cart -->
+                @if(cartItems()?.products?.length) {
+
+                <button
+                    type="button"
+                    class="clear-cart-btn"
+                    (click)="clearCart()">
+
+                    <i class="bi bi-trash3 me-2"></i>
+
+                    Clear Cart
+
+                </button>
+
+                }
+
+            </div>
+
+            <!-- Order Summary -->
+            @if(cartItems()?.products?.length) {
+                <div class="col-lg-4">
+
+                    <div class="summary-card">
+
+                        <span class="summary-label">
+                            Checkout
+                        </span>
+
+                        <h2>
+                            Order Summary
                         </h2>
 
-                    </div>
+                        <hr>
 
-                </div>
+                        <div class="summary-row">
 
-                }
-                @if(cartItems()?.products?.length){
-                    <button class="btn btn-outline-danger" (click)="clearCart()">
-                        Clear Cart
-                    </button>
-                }
+                            <span>
+                                Subtotal
+                            </span>
 
-            </div>
-
-            <div class="col-lg-4">
-
-                <div class="summary-card">
-
-                    <h2>
-                        Order Summary
-                    </h2>
-
-                    <hr>
-
-                    <div class="summary-row">
-
-                        <span>
-                            Subtotal ({{ cartItems()?.products?.length }} item(s))
-                        </span>
-
-                        <span>
-                            {{ cartItems()?.totalCartPrice }} EGP
-                        </span>
-
-                    </div>
-
-                    <div class="summary-row">
-
-                        <span>
-                            Shipping
-                        </span>
-
-                        <span class="text-success fw-bold">
-                            Free
-                        </span>
-
-                    </div>
-
-                    <div class="summary-row">
-
-                        <span>
-                            Tax
-                        </span>
-
-                        <span>
-                            Calculated at checkout
-                        </span>
-
-                    </div>
-
-                    <hr>
-
-                    <div class="summary-total">
-
-                        <div>
-
-                            <h5>Total</h5>
-
-                        </div>
-
-                        <div class="text-end">
-
-                            <h2>
+                            <strong>
                                 {{ cartItems()?.totalCartPrice }} EGP
-                            </h2>
+                            </strong>
 
-                            <small>
-                                Inclusive of VAT
-                            </small>
+                        </div>
+
+                        <div class="summary-row">
+
+                            <span>
+                                Items
+                            </span>
+
+                            <span>
+                                {{ cartItems()?.products?.length }}
+                            </span>
+
+                        </div>
+
+                        <div class="summary-row">
+
+                            <span>
+                                Shipping
+                            </span>
+
+                            <strong class="free">
+                                Free
+                            </strong>
+
+                        </div>
+
+                        <div class="summary-row">
+
+                            <span>
+                                Tax
+                            </span>
+
+                            <span class="muted">
+                                At checkout
+                            </span>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="summary-total">
+
+                            <div>
+                                <span>
+                                    Total
+                                </span>
+
+                                <small>
+                                    Inclusive of VAT
+                                </small>
+                            </div>
+
+                            <strong>
+                                {{ cartItems()?.totalCartPrice }} EGP
+                            </strong>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="checkout-btn">
+
+                            Proceed to Checkout
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </button>
+
+                        <div class="secure">
+
+                            <i class="bi bi-shield-check"></i>
+
+                            <span>
+                                Secure Checkout
+                            </span>
 
                         </div>
 
                     </div>
 
-                    <button class="btn btn-success checkout-btn">
-
-                        Proceed to Checkout
-
-                        <i class="bi bi-arrow-right ms-2"></i>
-
-                    </button>
-
-                    <div class="secure">
-
-                        <i class="bi bi-shield-lock-fill me-2"></i>
-
-                        Secure Checkout
-
-                    </div>
-
                 </div>
-
-            </div>
+            }
 
         </div>
 
     </div>
 
-</section>
+</div>
+

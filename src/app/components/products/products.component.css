@@ -46,7 +46,7 @@
 
     height:100%;
 
-    object-fit:contain;
+    object-fit:cover;
 
     transition:.4s;
 }
@@ -101,8 +101,6 @@
     margin-bottom:.7rem;
 
     display:-webkit-box;
-
-    -webkit-line-clamp:2;
 
     -webkit-box-orient:vertical;
 

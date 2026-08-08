@@ -51,7 +51,7 @@ export class ProductsComponent implements OnInit {
   }
 
 addToCart(productId: string){
-
+  this.CartService.updateCartCount(1, true);
   this.CartService.addProductToCart(productId).subscribe({
 
     next: (res) => {
