@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 export interface Orders {
     shippingAddress: ShippingAddress;
   taxPrice: number;
@@ -64,7 +64,6 @@ interface ShippingAddress {
 }
 
 
-=======
 export interface Order {}
 
 export interface CheckoutSession {
@@ -77,4 +76,3 @@ export interface CheckoutResponse {
     status: string;
     session: CheckoutSession;
 }
->>>>>>> 9dc956ac5a3f25f00b120682ce254d7f4cdc117e
