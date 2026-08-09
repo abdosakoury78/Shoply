@@ -1,0 +1,23 @@
+/* Radio Active Style */
+.custom-radio:checked {
+  background-color: #6c8a00 !important;
+  border-color: #6c8a00 !important;
+}
+
+/* Scrollbar Style */
+.custom-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #b5cd5f;
+  border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #6c8a00;
+}

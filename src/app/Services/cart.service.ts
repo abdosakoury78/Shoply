@@ -1,74 +1,83 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Service } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CartResponse } from '../Interfaces/cart.interface';
 
-@Service()
+@Injectable({
+    providedIn: 'root'
+})
 export class CartService {
     private readonly http = inject(HttpClient);
     private readonly apiUrl = environment.apiUrl;
     private readonly subject = new BehaviorSubject<number>(0);
 
-
-    getCartCount():Observable<number>{
+    getCartCount(): Observable<number> {
         return this.subject.asObservable();
     }
 
-    loadCartCount() {
+    loadCartCount(): void {
         this.getCartProducts().subscribe({
             next: (res) => {
+                let totalCount = 0;
                 res.data.products.forEach((product) => {
-                    this.subject.next(this.subject.getValue() + product.count);
-                })
-            }
-        })
-    }
-
-    updateCartCount(count:number, error:boolean = false){
-        if(error) {
-            const currentCount = this.subject.getValue();
-            this.subject.next(count + currentCount);
-        }
-    }
-
-    getCartProducts():Observable<CartResponse>{
-        return this.http.get<CartResponse>(`${this.apiUrl}/cart`,{
-            headers: {
-                Token: localStorage.getItem('userToken') ?? ''
+                    totalCount += product.count;
+                });
+                this.subject.next(totalCount);
             }
         });
     }
+    updateCartCount(count: number, isDelta: boolean = true): void {
+        if (isDelta) {
+            const currentCount = this.subject.getValue();
+            this.subject.next(Math.max(0, count + currentCount));
+        } else {
 
-    addProductToCart(productId:string){
-        return this.http.post(`${this.apiUrl}/cart`,{productId},{
-            headers:{
-                Token: localStorage.getItem('userToken') ?? ''
-            }
-        })
+            this.subject.next(count);
+        }
     }
 
-    updateQuantity(productId:string , count:number):Observable<CartResponse>{
-        return this.http.put<CartResponse>(`${this.apiUrl}/cart/${productId}`,{count} ,{
-            headers:{
-                Token: localStorage.getItem('userToken') ?? ''
-            }
-        })
+    getCartProducts(): Observable<CartResponse> {
+        return this.http.get<CartResponse>(`${this.apiUrl}/cart`, this.getHeaders());
     }
 
-    removeCartItem(productId:string):Observable<CartResponse>{
-        return this.http.delete<CartResponse>(`${this.apiUrl}/cart/${productId}`,{
-            headers:{
-                Token: localStorage.getItem('userToken') ?? ''
-            }
-        })
+    addProductToCart(productId: string): Observable<any> {
+        return this.http.post(`${this.apiUrl}/cart`, { productId }, this.getHeaders());
     }
 
-    clearCart(){
-        return this.http.delete(`${this.apiUrl}/cart`,{
-            headers: {
-                Token: localStorage.getItem('userToken') ?? ''
-            }
-        })
+    updateQuantity(productId: string, count: number): Observable<CartResponse> {
+        return this.http.put<CartResponse>(`${this.apiUrl}/cart/${productId}`, { count }, this.getHeaders());
+    }
+
+    removeCartItem(productId: string): Observable<CartResponse> {
+        return this.http.delete<CartResponse>(`${this.apiUrl}/cart/${productId}`, this.getHeaders());
+    }
+
+    clearCart(): Observable<any> {
+        return this.http.delete(`${this.apiUrl}/cart`, this.getHeaders());
+    }
+
+    private getHeaders() {
+        return {
+            headers: new HttpHeaders({
+                token: localStorage.getItem('userToken') || ''
+            })
+        };
+    }
+
+    checkoutSession(cartId: string, shippingAddress: object): Observable<any> {
+        return this.http.post(
+            `${this.apiUrl}/orders/checkout-session/${cartId}?url=http://localhost:4200`,
+            shippingAddress,
+            this.getHeaders()
+        );
+    }
+
+    createCashOrder(cartId: string, shippingAddress: object): Observable<any> {
+        return this.http.post(
+            `${this.apiUrl}/orders/${cartId}`,
+            shippingAddress,
+            this.getHeaders()
+        );
     }
 }
