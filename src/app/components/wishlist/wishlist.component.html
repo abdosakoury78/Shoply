@@ -1,1 +1,106 @@
-<p>wishlist works!</p>
+<section class="wishlist-page py-5">
+
+  <div class="container">
+
+    <div class="wishlist-header mb-4">
+      <h1>
+        My Wishlist
+        <span>({{ wishlistItems().length }} Items)</span>
+      </h1>
+    </div>
+
+    <div class="row g-4">
+
+      @for (product of wishlistItems(); track product._id) {
+
+        <div class="col-sm-12 col-md-6 col-lg-3">
+
+          <div class="product-card">
+
+            <div class="product-image">
+
+              <img
+                [src]="product.imageCover"
+                [alt]="product.title"
+              >
+
+              <button
+                class="remove-wishlist"
+                title="Remove from wishlist"
+                (click)="removeProduct(product._id)"
+                >
+                <i class="bi bi-x-lg"></i>
+              </button>
+
+            </div>
+
+            <div class="product-body">
+
+              <span class="category">
+                {{ product.category.name }}
+              </span>
+
+              <h5 class="product-title">
+                {{ product.title }}
+              </h5>
+
+              <p class="product-description">
+                {{ product.description | slice:0:70 }}...
+              </p>
+
+              <div class="product-info">
+
+                <span class="price">
+                  {{ product.price }}
+                  <small>EGP</small>
+                </span>
+
+                <span class="rating">
+                  <i class="bi bi-star-fill"></i>
+                  {{ product.ratingsAverage }}
+                </span>
+
+              </div>
+
+              <button
+              class="add-cart-btn"
+              (click)="addToCart(product._id)"
+              >
+
+                <i class="bi bi-cart3"></i>
+
+                Add To Cart
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      } @empty {
+
+        <div class="empty-wishlist">
+
+          <i class="bi bi-heart"></i>
+
+          <h3>Your Wishlist is Empty</h3>
+
+          <p>Add some products you love to your wishlist.</p>
+
+          <a
+            routerLink="/products"
+            class="btn btn-success">
+            Browse Products
+          </a>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</section>

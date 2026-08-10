@@ -15,6 +15,18 @@
                         [alt]="product.title"
                         (click)="goToProduct(product._id)">
 
+
+                    <!-- Wishlist Button -->
+                    <button
+                        class="wishlist-btn"
+                        title="Add to Wishlist"
+                        (click)="addProductToWishlist(product._id)"
+                        >
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
                 </div>
 
                 <div class="product-content">
