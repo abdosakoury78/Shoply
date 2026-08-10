@@ -1,34 +1,39 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Service } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CartResponse } from '../Interfaces/cart.interface';
 
-@Service()
+@Injectable({
+    providedIn: 'root'
+})
 export class CartService {
     private readonly http = inject(HttpClient);
     private readonly apiUrl = environment.apiUrl;
     private readonly subject = new BehaviorSubject<number>(0);
 
-
-    getCartCount():Observable<number>{
+    getCartCount(): Observable<number> {
         return this.subject.asObservable();
     }
 
-    loadCartCount() {
+    loadCartCount(): void {
         this.getCartProducts().subscribe({
             next: (res) => {
+                let totalCount = 0;
                 res.data.products.forEach((product) => {
-                    this.subject.next(this.subject.getValue() + product.count);
-                })
+                    totalCount += product.count;
+                });
+                this.subject.next(totalCount);
             }
-        })
+        });
     }
-
-    updateCartCount(count:number, error:boolean = false){
-        if(error) {
+    updateCartCount(count: number, isDelta: boolean = true): void {
+        if (isDelta) {
             const currentCount = this.subject.getValue();
-            this.subject.next(count + currentCount);
+            this.subject.next(Math.max(0, count + currentCount));
+        } else {
+
+            this.subject.next(count);
         }
     }
 

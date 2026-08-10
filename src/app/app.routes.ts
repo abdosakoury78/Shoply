@@ -13,27 +13,36 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { authGuardGuard } from './guards/auth-guard-guard';
 import { isLoggedGuard } from './guards/is-logged-guard';
 import { ProductComponent } from './components/product/product.component';
-
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { AllordersComponent } from './components/all-orders/all-orders.component';
 
 export const routes: Routes = [
-    {
-        path: "", component: AuthLayoutComponent, canActivate:[isLoggedGuard],children: [
-            { path: "", redirectTo:"signin" , pathMatch:"full" },
-            { path: "signin", component: SigninComponent, title: "Sign In" },
-            { path: "signup", component: SignupComponent, title: "Sign Up" },
-        ]
-    },
-    {
-        path: "", component: MainLayoutComponent,canActivate:[authGuardGuard] ,children: [
-            { path: "", redirectTo:"home" , pathMatch:"full" },
-            { path: "home", component: HomeComponent, title: 'Home' },
-            { path: "categories", component: CategoriesComponent, title: "Categories" },
-            { path: "brands", component: BrandsComponent, title: "Brands" },
-            { path: "products", component: ProductsComponent, title: "Products" },
-            {path: "products/:id", component: ProductComponent, title: "Products" },
-            { path: "cart", component: CartComponent, title: "Cart" },
-            { path: "wishlist", component:WishlistComponent, title: "WishList" },
-        ]
-    },
-    // { path: "**", component: NotFoundComponent, title: "Not Found" }
+  {
+    path: "", 
+    component: AuthLayoutComponent, 
+    canActivate: [isLoggedGuard],
+    children: [
+      { path: "", redirectTo: "signin", pathMatch: "full" },
+      { path: "signin", component: SigninComponent, title: "Sign In" },
+      { path: "signup", component: SignupComponent, title: "Sign Up" },
+    ]
+  },
+  {
+    path: "", 
+    component: MainLayoutComponent,
+    canActivate: [authGuardGuard],
+    children: [
+      { path: "", redirectTo: "home", pathMatch: "full" },
+      { path: "home", component: HomeComponent, title: 'Home' },
+      { path: "categories", component: CategoriesComponent, title: "Categories" },
+      { path: "brands", component: BrandsComponent, title: "Brands" },
+      { path: "products", component: ProductsComponent, title: "Products" },
+      { path: "products/:id", component: ProductComponent, title: "Products" },
+      { path: "cart", component: CartComponent, title: "Cart" },
+      { path: "wishlist", component: WishlistComponent, title: "WishList" },
+      { path: "allorders", component: AllordersComponent, title: "All Orders" },
+      { path: "checkout/:id", component: CheckoutComponent, title: "Checkout" },
+    ]
+  },
+  // { path: "**", component: NotFoundComponent, title: "Not Found" }
 ];

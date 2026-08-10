@@ -15,11 +15,13 @@ export class CartComponent implements OnInit {
 
   cartItems = signal<Cart | null>(null);
   cartCount = signal(0);
+  cartId = signal<string | null>(null);
 
     ngOnInit(): void {
       this._CartService.getCartProducts().subscribe({
         next: ({data}) => {
           this.cartItems.set(data)
+          this.cartId.set(data?._id || null);
         },
         error: (err) => {
           console.log(err);

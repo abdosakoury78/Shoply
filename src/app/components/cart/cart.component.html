@@ -259,7 +259,11 @@
 
                         <button
                             type="button"
-                            class="checkout-btn">
+                            class="checkout-btn"
+
+                            [routerLink]="['/checkout', cartItems()?._id]"
+                            >
+
 
                             Proceed to Checkout
 

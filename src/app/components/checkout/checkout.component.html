@@ -1,0 +1,335 @@
+<div class="checkout-page">
+
+    <div class="container py-5">
+
+        <!-- Header -->
+        <div class="checkout-header mb-5">
+
+        <button
+            class="back-btn"
+            routerLink="/cart">
+
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Cart
+
+        </button>
+
+        <span class="checkout-label">
+            Secure Checkout
+        </span>
+
+        <h1>
+            Complete Your Order
+        </h1>
+
+        <p>
+            Enter your shipping information to continue with your order.
+        </p>
+
+        </div>
+
+
+        <div class="row g-5">
+
+        <!-- Shipping Form -->
+        <div class="col-lg-7">
+
+            <div class="checkout-card">
+
+            <div class="section-header">
+
+                <div class="icon-box">
+                <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div>
+                <h2>
+                    Shipping Information
+                </h2>
+
+                <p>
+                    Where should we deliver your order?
+                </p>
+                </div>
+
+            </div>
+
+
+            <form [formGroup]="formData">
+
+                <!-- Address -->
+                <div class="form-group mb-4">
+
+                <label for="details">
+                    Detailed Address
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <textarea
+                    id="details"
+                    class="form-control"
+                    rows="4"
+                    placeholder="Enter your full address..."
+                    formControlName="details"
+                    ></textarea>
+
+                </div>
+
+                </div>
+
+
+                <div class="row g-4">
+
+                <!-- City -->
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                    <label for="city">
+                        City
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-city"></i>
+
+                        <input
+                        id="city"
+                        type="text"
+                        class="form-control"
+                        formControlName="city"
+                        placeholder="Enter your city"
+                        >
+
+                    </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Phone -->
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <input
+                        id="phone"
+                        type="tel"
+                        class="form-control"
+                        formControlName="phone"
+                        placeholder="01XXXXXXXXX"
+                        >
+
+                    </div>
+
+                    </div>
+
+                </div>
+
+                </div>
+
+
+                <!-- Secure Notice -->
+                <div class="secure-notice mt-4">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <div>
+                    <strong>
+                    Your information is secure
+                    </strong>
+
+                    <p>
+                    Your shipping information is only used to process
+                    and deliver your order.
+                    </p>
+                </div>
+
+                </div>
+
+
+                <!-- Submit -->
+                <button
+                type="button"
+                class="checkout-btn mt-4"
+                (click)="checkout()">
+
+                Continue to Payment
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- Order Summary -->
+        <div class="col-lg-5">
+
+            <div class="summary-card">
+
+            <div class="summary-header">
+
+                <h2>
+                Order Summary
+                </h2>
+
+                <span>
+                {{ cartItems()?.products?.length }} Items
+                </span>
+
+            </div>
+
+
+            <div class="products">
+
+                @for (
+                item of cartItems()?.products;
+                track item._id
+                ) {
+
+                <div class="summary-product">
+
+                    <div class="product-image">
+
+                    <img
+                        [src]="item.product.imageCover"
+                        [alt]="item.product.title"
+                    >
+
+                    <span class="product-count">
+                        {{ item.count }}
+                    </span>
+
+                    </div>
+
+                    <div class="product-info">
+
+                    <h4>
+                        {{ item.product.title }}
+                    </h4>
+
+                    <span>
+                        {{ item.product.category.name }}
+                    </span>
+
+                    </div>
+
+                    <strong>
+                    {{ item.price }} EGP
+                    </strong>
+
+                </div>
+
+                }
+
+            </div>
+
+
+            <hr>
+
+
+            <div class="summary-row">
+
+                <span>
+                Subtotal
+                </span>
+
+                <strong>
+                {{ cartItems()?.totalCartPrice }} EGP
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                Shipping
+                </span>
+
+                <strong class="free">
+                Free
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                Tax
+                </span>
+
+                <span class="muted">
+                Calculated at checkout
+                </span>
+
+            </div>
+
+
+            <hr>
+
+
+            <div class="total-row">
+
+                <div>
+                <span>
+                    Total
+                </span>
+
+                <small>
+                    Inclusive of VAT
+                </small>
+                </div>
+
+                <strong>
+                {{ cartItems()?.totalCartPrice }} EGP
+                </strong>
+
+            </div>
+
+
+            <div class="payment-methods">
+
+                <span>
+                We accept
+                </span>
+
+                <div class="payment-icons">
+
+                <i class="fa-brands fa-cc-visa"></i>
+
+                <i class="fa-brands fa-cc-mastercard"></i>
+
+                <i class="fa-brands fa-cc-paypal"></i>
+
+                </div>
+
+            </div>
+
+            </div>
+
+        </div>
+
+        </div>
+
+    </div>
+
+</div>
