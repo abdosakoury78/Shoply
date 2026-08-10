@@ -1,37 +1,38 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Service } from '@angular/core';
-<<<<<<< HEAD
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Orders } from '../Interfaces/order.interface';
-import { environment } from '../../environments/environment.development';
+import { CheckoutResponse, Orders } from '../Interfaces/order.interface';
+import { environment } from '../../environments/environment';
 
-@Service()
+@Injectable({
+  providedIn: 'root'
+})
 export class OrderService {
-    private readonly httpClient = inject(HttpClient);
+  private readonly httpClient = inject(HttpClient);
+  private readonly baseUrl = environment.apiUrl;
 
+  private getHeaders() {
+    return {
+      headers: new HttpHeaders({
+        token: localStorage.getItem('userToken') || ''
+      })
+    };
+  }
+
+  // جلب طلبات المستخدم
   getuserOrders(userId: string): Observable<Orders[]> {
     return this.httpClient.get<Orders[]>(
-      `${environment.apiUrl}/orders/user/${userId}`
+      `${this.baseUrl}/orders/user/${userId}`
     );
   }
-=======
-import { environment } from '../../environments/environment';
-import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { CheckoutResponse } from '../Interfaces/order.interface';
 
-@Service()
-export class OrderService {
-    private http = inject(HttpClient);
-    private baseUrl = environment.apiUrl;
-
-    checkoutSession(cartId: string, formData: FormGroup) : Observable<CheckoutResponse> {
-        const returnUrl = 'http://localhost:4200/';
-        return this.http.post<CheckoutResponse>(`${this.baseUrl}orders/checkout-session/${cartId}?url=${returnUrl}`, {formData}, {
-            headers: {
-                token: localStorage.getItem('userToken') || ''
-            }
-        });
-    }
->>>>>>> 9dc956ac5a3f25f00b120682ce254d7f4cdc117e
+  // جلسة الدفع
+  checkoutSession(cartId: string, formData: any): Observable<CheckoutResponse> {
+    const returnUrl = 'http://localhost:4200/';
+    return this.httpClient.post<CheckoutResponse>(
+      `${this.baseUrl}/orders/checkout-session/${cartId}?url=${returnUrl}`,
+      formData,
+      this.getHeaders()
+    );
+  }
 }
