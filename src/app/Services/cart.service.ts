@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -55,5 +55,13 @@ export class CartService {
 
     clearCart(){
         return this.http.delete(`${this.apiUrl}/cart`);
+    }
+
+    checkoutSession(cartId: string, shippingAddress: object): Observable<any> {
+         return this.http.post( `${this.apiUrl}/orders/checkout-session/${cartId}?url=http://localhost:4200`, shippingAddress);
+    } 
+         
+    createCashOrder(cartId: string, shippingAddress: object): Observable<any> {
+         return this.http.post( `${this.apiUrl}/orders/${cartId}`, shippingAddress);
     }
 }
