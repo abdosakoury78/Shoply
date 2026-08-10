@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../../Services/cart.service';
 import Swal from 'sweetalert2';
 import { Router, RouterLink } from '@angular/router';
+import { WishlistService } from '../../Services/wishlist.service';
 
 @Component({
   selector: 'app-products',
@@ -15,6 +16,7 @@ import { Router, RouterLink } from '@angular/router';
 export class ProductsComponent implements OnInit {
    private readonly ProductsService = inject(ProductsService);
    private readonly CartService = inject(CartService);
+   private readonly WishlistService = inject(WishlistService);
    private readonly router = inject(Router);
 
   allProducts = signal<Product[]>([]);
@@ -79,6 +81,25 @@ addToCart(productId: string){
   });
 
 }
+
+    addProductToWishlist(productId:string){
+    this.WishlistService.addProductToWishlist(productId).subscribe({
+      next: () => {
+        Swal.fire({
+        icon: 'success',
+        title: 'Product Added To Wishlist',
+        timer: 1500,
+        showConfirmButton: true
+      });
+      },
+      error: (err) => {
+        Swal.fire({
+        icon: 'error',
+        title: err.error.message
+      });        
+      }
+    })
+  }
 
    changePage(page: number) {
     if (page < 1 || page > this.totalPages()) return;

@@ -37,47 +37,23 @@ export class CartService {
         }
     }
 
-    getCartProducts(): Observable<CartResponse> {
-        return this.http.get<CartResponse>(`${this.apiUrl}/cart`, this.getHeaders());
+    getCartProducts():Observable<CartResponse>{
+        return this.http.get<CartResponse>(`${this.apiUrl}/cart`);
     }
 
-    addProductToCart(productId: string): Observable<any> {
-        return this.http.post(`${this.apiUrl}/cart`, { productId }, this.getHeaders());
+    addProductToCart(productId:string){
+        return this.http.post(`${this.apiUrl}/cart`,{productId});
     }
 
-    updateQuantity(productId: string, count: number): Observable<CartResponse> {
-        return this.http.put<CartResponse>(`${this.apiUrl}/cart/${productId}`, { count }, this.getHeaders());
+    updateQuantity(productId:string , count:number):Observable<CartResponse>{
+        return this.http.put<CartResponse>(`${this.apiUrl}/cart/${productId}`,{count});
     }
 
-    removeCartItem(productId: string): Observable<CartResponse> {
-        return this.http.delete<CartResponse>(`${this.apiUrl}/cart/${productId}`, this.getHeaders());
+    removeCartItem(productId:string):Observable<CartResponse>{
+        return this.http.delete<CartResponse>(`${this.apiUrl}/cart/${productId}`);
     }
 
-    clearCart(): Observable<any> {
-        return this.http.delete(`${this.apiUrl}/cart`, this.getHeaders());
-    }
-
-    private getHeaders() {
-        return {
-            headers: new HttpHeaders({
-                token: localStorage.getItem('userToken') || ''
-            })
-        };
-    }
-
-    checkoutSession(cartId: string, shippingAddress: object): Observable<any> {
-        return this.http.post(
-            `${this.apiUrl}/orders/checkout-session/${cartId}?url=http://localhost:4200`,
-            shippingAddress,
-            this.getHeaders()
-        );
-    }
-
-    createCashOrder(cartId: string, shippingAddress: object): Observable<any> {
-        return this.http.post(
-            `${this.apiUrl}/orders/${cartId}`,
-            shippingAddress,
-            this.getHeaders()
-        );
+    clearCart(){
+        return this.http.delete(`${this.apiUrl}/cart`);
     }
 }
