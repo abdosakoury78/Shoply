@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^22.0.0",
     "@angular/router": "^22.0.0",
     "@fortawesome/fontawesome-free": "^7.3.1",
+    "@jsverse/transloco": "^8.4.0",
     "bootstrap": "^5.3.8",
     "jwt-decode": "^4.0.0",
     "ngx-spinner": "^21.1.0",

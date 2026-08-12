@@ -7,7 +7,7 @@
       (click)="goBack()">
 
       <i class="fa-solid fa-arrow-left me-2"></i>
-      Back
+      {{ 'productDetails.back' | transloco }}
 
     </button>
 
@@ -26,7 +26,7 @@
           <!-- Wishlist Button -->
           <button
             class="wishlist-btn"
-            title="Add to Wishlist">
+            [title]="'productDetails.addToWishlist' | transloco">
 
             <i class="fa-regular fa-heart"></i>
 
@@ -55,9 +55,7 @@
 
           <div class="price">
 
-            {{ product.price }}
-
-            <span>EGP</span>
+            {{ product.price  | currency:'EGP' }}
 
           </div>
 
@@ -68,7 +66,7 @@
             {{ product.ratingsAverage }}
 
             <small>
-              ({{ product.ratingsQuantity }} Reviews)
+              ({{ product.ratingsQuantity }} {{ 'productDetails.reviews' | transloco }})
             </small>
 
           </div>
@@ -79,7 +77,7 @@
 
           <i class="fa-solid fa-box-open"></i>
 
-          {{ product.quantity }} In Stock
+          {{ product.quantity }} {{ 'productDetails.inStock' | transloco }}
 
         </div>
 
@@ -121,7 +119,7 @@
 
             <i class="fa-solid fa-cart-shopping me-2"></i>
 
-            Add To Cart
+            {{ 'productDetails.addToCart' | transloco }}
 
           </button>
 

@@ -1,135 +1,131 @@
 <div class="container py-5">
 
-    <div class="row g-4">
+  <div class="row g-4">
 
-        @for (product of products(); track product._id) {
+    @for (product of products(); track product._id) {
 
-        <div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="col-sm-6 col-md-4 col-lg-3">
 
-            <div class="product-card">
+      <div class="product-card">
 
-                <div class="product-image">
+        <div class="product-image">
 
-                    <img
-                        [src]="product.imageCover"
-                        [alt]="product.title"
-                        (click)="goToProduct(product._id)">
+          <img
+            [src]="product.imageCover"
+            [alt]="product.title"
+            (click)="goToProduct(product._id)">
 
+          <!-- Wishlist Button -->
+          <button
+            class="wishlist-btn"
+            [title]="'products.addToWishlist' | transloco"
+            (click)="addProductToWishlist(product._id)">
 
-                    <!-- Wishlist Button -->
-                    <button
-                        class="wishlist-btn"
-                        title="Add to Wishlist"
-                        (click)="addProductToWishlist(product._id)"
-                        >
+            <i class="fa-regular fa-heart"></i>
 
-                        <i class="fa-regular fa-heart"></i>
-
-                    </button>
-
-                </div>
-
-                <div class="product-content">
-
-                    <span class="product-category">
-                        {{ product.category.name }}
-                    </span>
-
-                    <h5 class="product-title">
-                        {{ product.title }}
-                    </h5>
-
-                    <p class="product-description">
-                        {{ product.description | slice:0:70 }}...
-                    </p>
-
-                    <div class="product-footer">
-
-                        <div class="price">
-                            {{ product.price }}
-                            <span>EGP</span>
-                        </div>
-
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            {{ product.ratingsAverage }}
-                        </div>
-
-                    </div>
-
-                    <button
-                    (click)="addToCart(product._id)"
-                    class="btn btn-cart"
-                    >
-
-                        <i class="fa-solid fa-cart-shopping me-2"></i>
-
-                        Add To Cart
-
-                    </button>
-
-                </div>
-
-            </div>
-
+          </button>
 
         </div>
 
-        }
+        <div class="product-content">
+
+          <span class="product-category">
+            {{ product.category.name }}
+          </span>
+
+          <h5 class="product-title">
+            {{ product.title }}
+          </h5>
+
+          <p class="product-description">
+            {{ product.description | slice:0:70 }}...
+          </p>
+
+          <div class="product-footer">
+
+            <div class="price">
+              {{ product.price | currency:'EGP' }}
+            </div>
+
+            <div class="rating">
+              <i class="fa-solid fa-star"></i>
+              {{ product.ratingsAverage }}
+            </div>
+
+          </div>
+
+          <button
+            (click)="addToCart(product._id)"
+            class="btn btn-cart">
+
+            <i class="fa-solid fa-cart-shopping me-2"></i>
+
+            {{ 'products.addToCart' | transloco }}
+
+          </button>
+
+        </div>
+
+      </div>
 
     </div>
 
+    }
+
+  </div>
+
 </div>
 
+<!-- Pagination Nav -->
 <nav class="pagination-wrapper mt-5">
 
-    <ul class="pagination">
+  <ul class="pagination">
 
-        <li class="page-item"
-            [class.disabled]="currentPage() === 1">
+    <li class="page-item"
+      [class.disabled]="currentPage() === 1">
 
-            <button
-                class="page-link"
-                (click)="changePage(currentPage() - 1)">
+      <button
+        class="page-link"
+        (click)="changePage(currentPage() - 1)">
 
-                Previous
+        {{ 'products.previous' | transloco }}
 
-            </button>
+      </button>
 
-        </li>
+    </li>
 
-        @for (page of pages(); track page) {
+    @for (page of pages(); track page) {
 
-        <li
-            class="page-item"
-            [class.active]="page === currentPage()">
+    <li
+      class="page-item"
+      [class.active]="page === currentPage()">
 
-            <button
-                class="page-link"
-                (click)="changePage(page)">
+      <button
+        class="page-link"
+        (click)="changePage(page)">
 
-                {{ page }}
+        {{ page }}
 
-            </button>
+      </button>
 
-        </li>
+    </li>
 
-        }
+    }
 
-        <li
-            class="page-item"
-            [class.disabled]="currentPage() === totalPages()">
+    <li
+      class="page-item"
+      [class.disabled]="currentPage() === totalPages()">
 
-            <button
-                class="page-link"
-                (click)="changePage(currentPage() + 1)">
+      <button
+        class="page-link"
+        (click)="changePage(currentPage() + 1)">
 
-                Next
+        {{ 'products.next' | transloco }}
 
-            </button>
+      </button>
 
-        </li>
+    </li>
 
-    </ul>
+  </ul>
 
 </nav>

@@ -1,14 +1,14 @@
 <section class="py-5 bg-light min-vh-100">
   <div class="container max-w-5xl">
     <h2 class="fw-bold text-dark mb-4 pb-2 border-bottom border-success border-2">
-      My Orders
+      {{ 'orders.title' | transloco }}
     </h2>
 
     <!-- Loading State -->
     @if (isLoading()) {
       <div class="d-flex justify-content-center align-items-center py-5">
         <div class="spinner-border text-success" role="status">
-          <span class="visually-hidden">Loading...</span>
+          <span class="visually-hidden">{{ 'orders.loading' | transloco }}</span>
         </div>
       </div>
     } @else {
@@ -21,17 +21,17 @@
               <!-- Order Header -->
               <div class="card-header bg-white p-3 border-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
                 <div>
-                  <span class="text-uppercase text-muted fs-7 d-block">Order Number</span>
+                  <span class="text-uppercase text-muted fs-7 d-block">{{ 'orders.orderNumber' | transloco }}</span>
                   <span class="fw-bold text-dark">#{{ order.id }}</span>
                 </div>
                 <div>
-                  <span class="text-uppercase text-muted fs-7 d-block">Date</span>
+                  <span class="text-uppercase text-muted fs-7 d-block">{{ 'orders.date' | transloco }}</span>
                   <span class="fw-medium text-secondary">
                     {{ order.createdAt | date:'mediumDate' }}
                   </span>
                 </div>
                 <div>
-                  <span class="text-uppercase text-muted fs-7 d-block">Total Amount</span>
+                  <span class="text-uppercase text-muted fs-7 d-block">{{ 'orders.totalAmount' | transloco }}</span>
                   <span class="fw-bold text-success">
                     {{ order.totalOrderPrice | currencyEgp }}
                   </span>
@@ -41,11 +41,11 @@
                 <div class="d-flex align-items-center gap-2">
                   <span class="badge rounded-pill px-3 py-2"
                         [class]="order.isPaid ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger'">
-                    {{ order.isPaid ? 'Paid' : 'Unpaid' }}
+                    {{ (order.isPaid ? 'orders.paid' : 'orders.unpaid') | transloco }}
                   </span>
                   <span class="badge rounded-pill px-3 py-2"
                         [class]="order.isDelivered ? 'bg-primary-subtle text-primary' : 'bg-warning-subtle text-warning-emphasis'">
-                    {{ order.isDelivered ? 'Delivered' : 'In Transit' }}
+                    {{ (order.isDelivered ? 'orders.delivered' : 'orders.inTransit') | transloco }}
                   </span>
                 </div>
               </div>
@@ -64,7 +64,7 @@
                           {{ item.product.title }}
                         </h6>
                         <small class="text-muted">
-                          Qty: <span class="fw-bold text-dark">{{ item.count }}</span>
+                          {{ 'orders.quantity' | transloco }}: <span class="fw-bold text-dark">{{ item.count }}</span>
                         </small>
                       </div>
                     </div>
@@ -80,12 +80,12 @@
               <!-- Shipping Info Footer -->
               <div class="card-footer bg-light p-3 text-muted fs-7 d-flex justify-content-between align-items-center">
                 <span>
-                  Payment Method: 
+                  {{ 'orders.paymentMethod' | transloco }}: 
                   <strong class="text-uppercase text-dark">{{ order.paymentMethodType }}</strong>
                 </span>
                 @if (order.shippingAddress?.city) {
                   <span>
-                    Delivering to: 
+                    {{ 'orders.deliveringTo' | transloco }}: 
                     <strong class="text-dark">{{ order.shippingAddress.city }}</strong>
                   </span>
                 }
@@ -98,8 +98,8 @@
         <!-- Empty Orders State -->
         <div class="card shadow-sm border-0 p-5 text-center">
           <i class="bi bi-box-seam display-4 text-muted mb-3"></i>
-          <h4 class="fw-bold text-dark">No orders found</h4>
-          <p class="text-muted mb-0">You haven't placed any orders yet.</p>
+          <h4 class="fw-bold text-dark">{{ 'orders.noOrdersTitle' | transloco }}</h4>
+          <p class="text-muted mb-0">{{ 'orders.noOrdersText' | transloco }}</p>
         </div>
       }
     }

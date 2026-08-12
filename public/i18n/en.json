@@ -1,0 +1,194 @@
+{
+  "navbar": {
+    "brand": "Shoply",
+    "home": "Home",
+    "products": "Products",
+    "categories": "Categories",
+    "brands": "Brands",
+    "orders": "Orders",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "logout": "Logout",
+    "login": "Login",
+    "signin": "Sign In",
+    "signup": "Sign Up"
+  },
+  
+  "auth": {
+    "signin": {
+      "title": "Sign In",
+      "subtitle": "Welcome back! Please enter your details.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Please enter a valid email address.",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "passwordRequired": "Password is required.",
+      "submitBtn": "Sign In",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create Account"
+    },
+    "signup": {
+      "title": "Create Account",
+      "subtitle": "Join Shoply and start shopping today.",
+      "nameLabel": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "nameRequired": "Name is required.",
+      "nameMinlength": "Name must be at least 3 characters long.",
+      "nameMaxlength": "Name must not exceed 20 characters.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Please enter a valid email address.",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "passwordRequired": "Password is required.",
+      "passwordMinlength": "Password must be at least 6 characters.",
+      "passwordPattern": "Password must contain at least one uppercase letter and one number.",
+      "rePasswordLabel": "Confirm Password",
+      "rePasswordPlaceholder": "Confirm your password",
+      "rePasswordRequired": "Please confirm your password.",
+      "passwordsMismatch": "Passwords do not match.",
+      "submitBtn": "Create Account",
+      "hasAccount": "Already have an account?",
+      "signInLink": "Sign In"
+    }
+  
+
+  },
+  "products": {
+    "addToCart": "Add To Cart",
+    "addToWishlist": "Add to Wishlist",
+    "previous": "Previous",
+    "next": "Next",
+    "cartSuccess": "Product Added To Cart",
+    "wishlistSuccess": "Product Added To Wishlist",
+    "errorOccurred": "An error occurred"
+  },
+  "productDetails": {
+    "back": "Back",
+    "addToWishlist": "Add to Wishlist",
+    "reviews": "Reviews",
+    "inStock": "In Stock",
+    "addToCart": "Add To Cart"
+  },
+  "home": {
+    "hero": {
+      "badge": "New Season Arrival",
+      "titlePart1": "Elevate Your ",
+      "titlePart2": "Personal Style",
+      "description": "Discover our curated seasonal collection that blends timeless elegance with modern comfort. Crafted for those who appreciate premium quality and exceptional design.",
+      "shopNow": "Shop Now",
+      "explore": "Explore"
+    },
+    "categories": {
+      "sectionLabel": "Explore Collections",
+      "title": "Shop By Category",
+      "subtitle": "Explore our carefully selected collections.",
+      "viewAll": "View All"
+    },
+    "products": {
+      "sectionLabel": "Featured Products",
+      "title": "Trending Collection",
+      "subtitle": "Explore our latest products.",
+      "viewAll": "View All"
+    },
+    "footer": {
+      "rights": "© 2026 ShopEase. All Rights Reserved."
+    }
+  },
+  "orders": {
+    "title": "My Orders",
+    "loading": "Loading...",
+    "orderNumber": "Order Number",
+    "date": "Date",
+    "totalAmount": "Total Amount",
+    "paid": "Paid",
+    "unpaid": "Unpaid",
+    "delivered": "Delivered",
+    "inTransit": "In Transit",
+    "quantity": "Qty",
+    "paymentMethod": "Payment Method",
+    "deliveringTo": "Delivering to",
+    "noOrdersTitle": "No orders found",
+    "noOrdersText": "You haven't placed any orders yet."
+  },
+  "wishlist": {
+    "title": "My Wishlist",
+    "items": "Items",
+    "removeTitle": "Remove from wishlist",
+    "currency": "EGP",
+    "addToCart": "Add To Cart",
+    "emptyTitle": "Your Wishlist is Empty",
+    "emptyText": "Add some products you love to your wishlist.",
+    "browseProducts": "Browse Products"
+  },
+  "cart": {
+    "badge": "Your Selection",
+    "title": "Shopping Cart",
+    "itemsCount": "item(s) in your cart.",
+    "emptyTitle": "Your cart is empty",
+    "emptySubtitle": "Discover something beautiful and add it to your cart.",
+    "continueShopping": "Continue Shopping",
+    "removeAria": "Remove product",
+    "price": "Price",
+    "currency": "EGP",
+    "clearCart": "Clear Cart",
+    "summary": {
+      "checkoutLabel": "Checkout",
+      "title": "Order Summary",
+      "subtotal": "Subtotal",
+      "items": "Items",
+      "shipping": "Shipping",
+      "free": "Free",
+      "tax": "Tax",
+      "atCheckout": "At checkout",
+      "total": "Total",
+      "vat": "Inclusive of VAT",
+      "proceedToCheckout": "Proceed to Checkout",
+      "secureCheckout": "Secure Checkout"
+    }
+  },
+  "checkout": {
+    "headerBadge": "CHECKOUT",
+    "title": "Shipping & Payment",
+    "backToCart": "Back to Cart",
+    "shippingAddress": "Shipping Address",
+    "deliveryInfo": "Delivery Information",
+    "deliverySubinfo": "Please ensure your address is accurate for smooth delivery",
+    "city": "City",
+    "cityPlaceholder": "e.g. Cairo, Alexandria",
+    "streetAddress": "Street Address",
+    "streetPlaceholder": "Street name, building number...",
+    "phone": "Phone Number",
+    "phonePlaceholder": "e.g. 01012345678",
+    "paymentMethod": "Payment Method",
+    "cashOnDelivery": "Cash on Delivery",
+    "onlinePayment": "Online Payment",
+    "processing": "Processing...",
+    "completeCashOrder": "Complete Cash Order",
+    "proceedToOnlinePayment": "Proceed to Online Payment",
+    "currency": "EGP",
+    "errors": {
+      "cityRequired": "City is required",
+      "streetRequired": "Street address is required",
+      "phoneRequired": "Phone number is required",
+      "phonePattern": "Please enter a valid Egyptian phone number"
+    },
+    "summary": {
+      "badge": "CHECKOUT",
+      "title": "Order Summary",
+      "qty": "Qty",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "free": "Free",
+      "tax": "Tax",
+      "atCheckout": "At checkout",
+      "total": "Total",
+      "vat": "Inclusive of VAT",
+      "secureCheckout": "SECURE CHECKOUT"
+    }
+  }
+
+}

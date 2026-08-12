@@ -6,15 +6,15 @@
         <div class="cart-header mb-5">
 
             <span class="cart-badge">
-                Your Selection
+                {{ 'cart.badge' | transloco }}
             </span>
 
             <h1 class="cart-title mt-2">
-                Shopping Cart
+                {{ 'cart.title' | transloco }}
             </h1>
 
             <p class="cart-subtitle">
-                {{ cartItems()?.products?.length }} item(s) in your cart.
+                {{ cartItems()?.products?.length || 0 }} {{ 'cart.itemsCount' | transloco }}
             </p>
 
         </div>
@@ -29,18 +29,18 @@
                     <i class="bi bi-bag-x"></i>
 
                     <h3>
-                        Your cart is empty
+                        {{ 'cart.emptyTitle' | transloco }}
                     </h3>
 
                     <p>
-                        Discover something beautiful and add it to your cart.
+                        {{ 'cart.emptySubtitle' | transloco }}
                     </p>
 
                     <a
                         routerLink="/products"
                         class="btn bg-main text-white">
 
-                        Continue Shopping
+                        {{ 'cart.continueShopping' | transloco }}
 
                     </a>
 
@@ -49,6 +49,7 @@
                 }
 
             </div>
+            
             <!-- Cart Items -->
             <div class="col-lg-8">
 
@@ -61,7 +62,7 @@
                         type="button"
                         class="remove-btn"
                         (click)="removeCartItem(item.product._id, item.count)"
-                        aria-label="Remove product">
+                        [attr.aria-label]="'cart.removeAria' | transloco">
 
                         <i class="bi bi-x-lg"></i>
 
@@ -139,11 +140,11 @@
                         <div class="cart-price">
 
                             <span>
-                                Price
+                                {{ 'cart.price' | transloco }}
                             </span>
 
                             <strong>
-                                {{ item.price }} EGP
+                                {{ item.price }} {{ 'cart.currency' | transloco }}
                             </strong>
 
                         </div>
@@ -153,7 +154,6 @@
                 </div>
 
                 }
-
 
                 <!-- Clear Cart -->
                 @if(cartItems()?.products?.length) {
@@ -165,7 +165,7 @@
 
                     <i class="bi bi-trash3 me-2"></i>
 
-                    Clear Cart
+                    {{ 'cart.clearCart' | transloco }}
 
                 </button>
 
@@ -180,11 +180,11 @@
                     <div class="summary-card">
 
                         <span class="summary-label">
-                            Checkout
+                            {{ 'cart.summary.checkoutLabel' | transloco }}
                         </span>
 
                         <h2>
-                            Order Summary
+                            {{ 'cart.summary.title' | transloco }}
                         </h2>
 
                         <hr>
@@ -192,11 +192,11 @@
                         <div class="summary-row">
 
                             <span>
-                                Subtotal
+                                {{ 'cart.summary.subtotal' | transloco }}
                             </span>
 
                             <strong>
-                                {{ cartItems()?.totalCartPrice }} EGP
+                                {{ cartItems()?.totalCartPrice }} {{ 'cart.currency' | transloco }}
                             </strong>
 
                         </div>
@@ -204,7 +204,7 @@
                         <div class="summary-row">
 
                             <span>
-                                Items
+                                {{ 'cart.summary.items' | transloco }}
                             </span>
 
                             <span>
@@ -216,11 +216,11 @@
                         <div class="summary-row">
 
                             <span>
-                                Shipping
+                                {{ 'cart.summary.shipping' | transloco }}
                             </span>
 
                             <strong class="free">
-                                Free
+                                {{ 'cart.summary.free' | transloco }}
                             </strong>
 
                         </div>
@@ -228,11 +228,11 @@
                         <div class="summary-row">
 
                             <span>
-                                Tax
+                                {{ 'cart.summary.tax' | transloco }}
                             </span>
 
                             <span class="muted">
-                                At checkout
+                                {{ 'cart.summary.atCheckout' | transloco }}
                             </span>
 
                         </div>
@@ -243,16 +243,16 @@
 
                             <div>
                                 <span>
-                                    Total
+                                    {{ 'cart.summary.total' | transloco }}
                                 </span>
 
                                 <small>
-                                    Inclusive of VAT
+                                    {{ 'cart.summary.vat' | transloco }}
                                 </small>
                             </div>
 
                             <strong>
-                                {{ cartItems()?.totalCartPrice }} EGP
+                                {{ cartItems()?.totalCartPrice }} {{ 'cart.currency' | transloco }}
                             </strong>
 
                         </div>
@@ -260,12 +260,9 @@
                         <button
                             type="button"
                             class="checkout-btn"
+                            [routerLink]="['/checkout', cartItems()?._id]">
 
-                            [routerLink]="['/checkout', cartItems()?._id]"
-                            >
-
-
-                            Proceed to Checkout
+                            {{ 'cart.summary.proceedToCheckout' | transloco }}
 
                             <i class="bi bi-arrow-right"></i>
 
@@ -276,7 +273,7 @@
                             <i class="bi bi-shield-check"></i>
 
                             <span>
-                                Secure Checkout
+                                {{ 'cart.summary.secureCheckout' | transloco }}
                             </span>
 
                         </div>
@@ -291,4 +288,3 @@
     </div>
 
 </div>
-

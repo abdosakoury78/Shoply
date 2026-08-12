@@ -5,10 +5,12 @@ import { Orders } from '../../Interfaces/order.interface';
 import { OrderService } from '../../Services/order.service';
 import { UserDetails } from '../../Interfaces/user-details.interface';
 import { CurrencyEgpPipe } from '../../pipes/currency-egp-pipe';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-all-orders',
-  imports: [DatePipe, CurrencyEgpPipe],
+  standalone: true,
+  imports: [DatePipe, CurrencyEgpPipe, TranslocoPipe],
   templateUrl: './all-orders.component.html',
   styleUrl: './all-orders.component.css',
 })

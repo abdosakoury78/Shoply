@@ -1,0 +1,51 @@
+/* دفع عناصر الـ Navbar لليمين في LTR ولليسار في RTL تلقائياً */
+.nav-actions-wrapper {
+  margin-left: auto;
+}
+
+:host-context([dir="rtl"]) .nav-actions-wrapper {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Globe Icon Button Styling */
+.btn-lang-dropdown {
+  color: var(--ink) !important;
+  padding: .5rem .7rem !important;
+  border-radius: 50%;
+  transition: all .3s ease;
+  cursor: pointer;
+}
+
+.btn-lang-dropdown:hover,
+.btn-lang-dropdown[aria-expanded="true"] {
+  color: var(--main-color-dark) !important;
+  background-color: var(--main-color-light);
+}
+
+/* إخفاء سهم الـ Bootstrap التلقائي */
+.btn-lang-dropdown::after {
+  display: none !important;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: .4rem;
+  min-width: 130px;
+}
+
+.dropdown-item {
+  border-radius: 8px;
+  padding: .5rem .8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color .2s ease;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: var(--main-color) !important;
+  color: white !important;
+}

@@ -4,8 +4,8 @@
 
     <div class="wishlist-header mb-4">
       <h1>
-        My Wishlist
-        <span>({{ wishlistItems().length }} Items)</span>
+        {{ 'wishlist.title' | transloco }}
+        <span>({{ wishlistItems().length }} {{ 'wishlist.items' | transloco }})</span>
       </h1>
     </div>
 
@@ -26,7 +26,7 @@
 
               <button
                 class="remove-wishlist"
-                title="Remove from wishlist"
+                [title]="'wishlist.removeTitle' | transloco"
                 (click)="removeProduct(product._id)"
                 >
                 <i class="bi bi-x-lg"></i>
@@ -52,7 +52,7 @@
 
                 <span class="price">
                   {{ product.price }}
-                  <small>EGP</small>
+                  <small>{{ 'wishlist.currency' | transloco }}</small>
                 </span>
 
                 <span class="rating">
@@ -63,13 +63,13 @@
               </div>
 
               <button
-              class="add-cart-btn"
-              (click)="addToCart(product._id)"
+                class="add-cart-btn"
+                (click)="addToCart(product._id)"
               >
 
                 <i class="bi bi-cart3"></i>
 
-                Add To Cart
+                {{ 'wishlist.addToCart' | transloco }}
 
               </button>
 
@@ -85,14 +85,14 @@
 
           <i class="bi bi-heart"></i>
 
-          <h3>Your Wishlist is Empty</h3>
+          <h3>{{ 'wishlist.emptyTitle' | transloco }}</h3>
 
-          <p>Add some products you love to your wishlist.</p>
+          <p>{{ 'wishlist.emptyText' | transloco }}</p>
 
           <a
             routerLink="/products"
             class="btn btn-success">
-            Browse Products
+            {{ 'wishlist.browseProducts' | transloco }}
           </a>
 
         </div>

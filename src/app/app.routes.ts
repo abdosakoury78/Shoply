@@ -13,8 +13,8 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { authGuardGuard } from './guards/auth-guard-guard';
 import { isLoggedGuard } from './guards/is-logged-guard';
 import { ProductComponent } from './components/product/product.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AllordersComponent } from './components/all-orders/all-orders.component';
+import { CheckoutComponent } from './components/check-out/check-out.component';
 
 export const routes: Routes = [
   {

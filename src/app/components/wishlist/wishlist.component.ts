@@ -5,70 +5,66 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CartService } from '../../Services/cart.service';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [CommonModule,RouterLink],
+  standalone: true,
+  imports: [CommonModule, RouterLink, TranslocoPipe],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css',
 })
-export class WishlistComponent implements OnInit{
+export class WishlistComponent implements OnInit {
   private readonly _WishlistService = inject(WishlistService);
   private readonly _CartService = inject(CartService);
+
   wishlistItems = signal<Product[]>([]);
-  
+
   ngOnInit(): void {
     this._WishlistService.getWishlistProducts().subscribe({
-      next: ({data}) => {
-        this.wishlistItems.set(data)
+      next: ({ data }) => {
+        this.wishlistItems.set(data);
         console.log(data);
-        
       },
       error: (err) => {
         console.log(err);
       }
-    })
+    });
   }
 
-  removeProduct(productId:string){
-    this._WishlistService.removeProduct(productId).subscribe({      
-      next: (res) => {  
+  removeProduct(productId: string): void {
+    this._WishlistService.removeProduct(productId).subscribe({
+      next: (res) => {
         console.log(res);
         this.wishlistItems.update(products =>
-        products.filter(product => product._id !== productId)
-      );
-        
+          products.filter(product => product._id !== productId)
+        );
       },
-    })
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
-  addToCart(productId: string){
+  addToCart(productId: string): void {
     this._CartService.updateCartCount(1, true);
     this._CartService.addProductToCart(productId).subscribe({
-  
       next: (res) => {
-  
         console.log(res);
-         Swal.fire({
+        Swal.fire({
           icon: 'success',
           title: 'Product Added To Cart',
           timer: 1500,
           showConfirmButton: false
         });
-  
       },
-  
       error: (err) => {
-  
         console.log(err);
-         Swal.fire({
+        Swal.fire({
           icon: 'error',
-          title: err.error.message
+          title: err.error?.message || 'Error occurred'
         });
-  
       }
-  
     });
-  
   }
 }

@@ -1,0 +1,192 @@
+{
+  "navbar": {
+    "brand": "Shoply",
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "categories": "الفئات",
+    "brands": "العلامةالتجارية",
+    "orders": "الطلبات",
+    "wishlist": "المفضلة",
+    "cart": "عربة التسوق",
+    "logout": "تسجيل الخروج",
+    "login": "تسجيل الدخول",
+    "signin": "تسجيل الدخول",
+    "signup": "إنشاء حساب"
+  },
+  "auth": {
+    "signin": {
+      "title": "تسجيل الدخول",
+      "subtitle": "مرحباً بعودتك! يرجى إدخال بياناتك.",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل البريد الإلكتروني",
+      "emailRequired": "البريد الإلكتروني مطلوب.",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح.",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "passwordRequired": "كلمة المرور مطلوبة.",
+      "submitBtn": "تسجيل الدخول",
+      "noAccount": "ليس لديك حساب؟",
+      "createAccount": "إنشاء حساب"
+    },
+      "signup": {
+      "title": "إنشاء حساب",
+      "subtitle": "انضم إلى Shoply وابدأ التسوق اليوم.",
+      "nameLabel": "الاسم بالكامل",
+      "namePlaceholder": "أدخل اسمك بالكامل",
+      "nameRequired": "الاسم مطلوب.",
+      "nameMinlength": "يجب ألا يقل الاسم عن 3 أحرف.",
+      "nameMaxlength": "يجب ألا يتجاوز الاسم 20 حرفاً.",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل البريد الإلكتروني",
+      "emailRequired": "البريد الإلكتروني مطلوب.",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح.",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "passwordRequired": "كلمة المرور مطلوبة.",
+      "passwordMinlength": "يجب ألا تقل كلمة المرور عن 6 عناصر.",
+      "passwordPattern": "يجب أن تحتوي كلمة المرور على حرف كبير واحد ورقم واحد على الأقل.",
+      "rePasswordLabel": "تأكيد كلمة المرور",
+      "rePasswordPlaceholder": "أكد كلمة المرور",
+      "rePasswordRequired": "يرجى تأكيد كلمة المرور.",
+      "passwordsMismatch": "كلمتا المرور غير متطابقتين.",
+      "submitBtn": "إنشاء حساب",
+      "hasAccount": "لديك حساب بالفعل؟",
+      "signInLink": "تسجيل الدخول"
+    }
+  },
+   "products": {
+    "addToCart": "إضافة إلى العربة",
+    "addToWishlist": "إضافة إلى المفضلة",
+    "previous": "السابق",
+    "next": "التالي",
+    "cartSuccess": "تمت إضافة المنتج إلى العربة",
+    "wishlistSuccess": "تمت إضافة المنتج إلى المفضلة",
+    "errorOccurred": "حدث خطأ ما"
+  },
+  "productDetails": {
+    "back": "العودة",
+    "addToWishlist": "إضافة إلى المفضلة",
+    "reviews": "تقييمات",
+    "inStock": "متوفر في المخزون",
+    "addToCart": "إضافة إلى العربة"
+  },
+  "home": {
+    "hero": {
+      "badge": "وصل حديثاً للموسم الجديد",
+      "titlePart1": "ارتقِ بـ ",
+      "titlePart2": "أسلوبك الشخصي",
+      "description": "اكتشف تشكيلاتنا الموسمية المختارة بعناية والتي تجمع بين الأناقة الكلاسيكية والراحة العصرية. صممت لأصحاب الذوق الرفيع والجودة العالية.",
+      "shopNow": "تسوق الآن",
+      "explore": "استكشف"
+    },
+    "categories": {
+      "sectionLabel": "استكشف التشكيلات",
+      "title": "التسوق حسب الفئة",
+      "subtitle": "استكشف مجموعاتنا المختارة بعناية.",
+      "viewAll": "عرض الكل"
+    },
+    "products": {
+      "sectionLabel": "منتجات مميزة",
+      "title": "التشكيلة الأكثر طلبًا",
+      "subtitle": "استكشف أحدث منتجاتنا.",
+      "viewAll": "عرض الكل"
+    },
+    "footer": {
+      "rights": "© 2026 ShopEase. جميع الحقوق محفوظة."
+    }
+  },
+  "orders": {
+    "title": "طلباتي",
+    "loading": "جاري التحميل...",
+    "orderNumber": "رقم الطلب",
+    "date": "التاريخ",
+    "totalAmount": "المبلغ الإجمالي",
+    "paid": "مدفوع",
+    "unpaid": "غير مدفوع",
+    "delivered": "تم التوصيل",
+    "inTransit": "قيد التوصيل",
+    "quantity": "الكمية",
+    "paymentMethod": "طريقة الدفع",
+    "deliveringTo": "التوصيل إلى",
+    "noOrdersTitle": "لا توجد طلبات",
+    "noOrdersText": "لم تقم بإجراء أي طلبات حتى الآن."
+  },
+  "wishlist": {
+    "title": "قائمة رغباتي",
+    "items": "منتجات",
+    "removeTitle": "حذف من قائمة الرغبات",
+    "currency": "ج.م",
+    "addToCart": "إضافة إلى السلة",
+    "emptyTitle": "قائمة الرغبات فارغة",
+    "emptyText": "قم بإضافة بعض المنتجات التي تحبها إلى قائمة الرغبات.",
+    "browseProducts": "تصفح المنتجات"
+  },
+  "cart": {
+    "badge": "اختياراتك",
+    "title": "سلة التسوق",
+    "itemsCount": "منتج(منتجات) في سلتك.",
+    "emptyTitle": "سلة التسوق فارغة",
+    "emptySubtitle": "اكتشف منتجاتنا المميزة وأضفها إلى السلة.",
+    "continueShopping": "متابعة التسوق",
+    "removeAria": "إزالة المنتج",
+    "price": "السعر",
+    "currency": "ج.م",
+    "clearCart": "مسح السلة بالكامل",
+    "summary": {
+      "checkoutLabel": "إتمام الشراء",
+      "title": "ملخص الطلب",
+      "subtotal": "المجموع الفرعي",
+      "items": "عدد المنتجات",
+      "shipping": "الشحن",
+      "free": "مجاني",
+      "tax": "الضريبة",
+      "atCheckout": "عند إتمام الشراء",
+      "total": "الإجمالي",
+      "vat": "شامل ضريبة القيمة المضافة",
+      "proceedToCheckout": "الانتقال للدفع",
+      "secureCheckout": "دفع آمن 100%"
+    }
+  },
+  "checkout": {
+    "headerBadge": "الدفع",
+    "title": "الشحن والدفع",
+    "backToCart": "العودة للسلة",
+    "shippingAddress": "عنوان الشحن",
+    "deliveryInfo": "معلومات التوصيل",
+    "deliverySubinfo": "يرجى التأكد من صحة عنوانك لضمان وصول الشحنة بسلاسة",
+    "city": "المدينة",
+    "cityPlaceholder": "مثال: القاهرة، الإسكندرية",
+    "streetAddress": "عنوان الشارع",
+    "streetPlaceholder": "اسم الشارع، رقم المبنى...",
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "مثال: 01012345678",
+    "paymentMethod": "طريقة الدفع",
+    "cashOnDelivery": "الدفع عند الاستلام",
+    "onlinePayment": "الدفع الإلكتروني",
+    "processing": "جاري المعالجة...",
+    "completeCashOrder": "إتمام الطلب نقداً",
+    "proceedToOnlinePayment": "الانتقال للدفع الإلكتروني",
+    "currency": "ج.م",
+    "errors": {
+      "cityRequired": "اسم المدينة مطلوب",
+      "streetRequired": "عنوان الشارع مطلوب",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phonePattern": "يرجى إدخال رقم هاتف مصري صحيح"
+    },
+    "summary": {
+      "badge": "الدفع",
+      "title": "ملخص الطلب",
+      "qty": "الكمية",
+      "subtotal": "المجموع الفرعي",
+      "shipping": "الشحن",
+      "free": "مجاني",
+      "tax": "الضريبة",
+      "atCheckout": "عند الدفع",
+      "total": "الإجمالي",
+      "vat": "شامل ضريبة القيمة المضافة",
+      "secureCheckout": "دفع آمن 100%"
+    }
+  }
+
+
+}   
