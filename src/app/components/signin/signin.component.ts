@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-signin',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, TranslocoPipe],
   templateUrl: './signin.component.html',
   styleUrls: [
     '../signup/signup.component.css', 
@@ -35,7 +36,7 @@ export class SigninComponent {
       next: (response) => {
         if (response.token) {
           localStorage.setItem('userToken', response.token);
-          this.authService.saveUserData()
+          this.authService.saveUserData();
         }
         this.router.navigate(['/home']);
       },

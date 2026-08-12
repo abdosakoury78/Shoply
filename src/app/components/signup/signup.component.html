@@ -2,89 +2,69 @@
   @if(errorMessage()) {
   <div class="errorMes">
     <i class="fa-regular fa-circle-xmark"></i>
-    <span>{{errorMessage()}}</span>
+    <span>{{ errorMessage() }}</span>
     <button type="button" class="close-btn" (click)="errorMessage.set('')">
       <i class="fa-solid fa-xmark"></i>
     </button>
   </div>
   }
-  <div class="signup-card">
 
-    <h2>Create Account</h2>
-    <p class="subtitle">Join Shoply and start shopping today.</p>
+  <div class="signup-card">
+    <h2>{{ 'auth.signup.title' | transloco }}</h2>
+    <p class="subtitle">{{ 'auth.signup.subtitle' | transloco }}</p>
 
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
 
       <!-- ================= Name ================= -->
       <div class="form-group">
-
-        <label for="name">Full Name</label>
-
-        <input id="name" type="text" class="form-control" placeholder="Enter your full name" formControlName="name">
+        <label for="name">{{ 'auth.signup.nameLabel' | transloco }}</label>
+        <input id="name" type="text" class="form-control"
+          [placeholder]="'auth.signup.namePlaceholder' | transloco" formControlName="name">
 
         @if(signupForm.get('name')?.invalid && signupForm.get('name')?.dirty) {
-
         <div class="alert alert-danger mt-2 mb-0">
-
           <ul class="mb-0 ps-3">
-
             @if(signupForm.get('name')?.hasError('required')) {
-            <li>Name is required.</li>
+            <li>{{ 'auth.signup.nameRequired' | transloco }}</li>
             }
-
             @if(signupForm.get('name')?.hasError('minlength')) {
-            <li>Name must be at least 3 characters long.</li>
+            <li>{{ 'auth.signup.nameMinlength' | transloco }}</li>
             }
-
             @if(signupForm.get('name')?.hasError('maxlength')) {
-            <li>Name must not exceed 20 characters.</li>
+            <li>{{ 'auth.signup.nameMaxlength' | transloco }}</li>
             }
-
           </ul>
-
         </div>
-
         }
-
       </div>
 
       <!-- ================= Email ================= -->
       <div class="form-group">
-
-        <label for="email">Email</label>
-
-        <input id="email" type="email" class="form-control" placeholder="Enter your email" formControlName="email">
+        <label for="email">{{ 'auth.signup.emailLabel' | transloco }}</label>
+        <input id="email" type="email" class="form-control"
+          [placeholder]="'auth.signup.emailPlaceholder' | transloco" formControlName="email">
 
         @if(signupForm.get('email')?.invalid && signupForm.get('email')?.dirty) {
-
         <div class="alert alert-danger mt-2 mb-0">
-
           <ul class="mb-0 ps-3">
-
             @if(signupForm.get('email')?.hasError('required')) {
-            <li>Email is required.</li>
+            <li>{{ 'auth.signup.emailRequired' | transloco }}</li>
             }
-
             @if(signupForm.get('email')?.hasError('email')) {
-            <li>Please enter a valid email address.</li>
+            <li>{{ 'auth.signup.emailInvalid' | transloco }}</li>
             }
-
           </ul>
-
         </div>
-
         }
-
       </div>
 
       <!-- ================= Password ================= -->
       <div class="form-group">
-
-        <label for="password">Password</label>
+        <label for="password">{{ 'auth.signup.passwordLabel' | transloco }}</label>
 
         <div class="password-wrapper">
           <input id="password" [type]="showPassword() ? 'text' : 'password'" class="form-control"
-            placeholder="Enter your password" formControlName="password">
+            [placeholder]="'auth.signup.passwordPlaceholder' | transloco" formControlName="password">
 
           <button type="button" class="eye-btn" (click)="showPassword.set(!showPassword())"
             aria-label="Toggle password visibility">
@@ -93,39 +73,29 @@
         </div>
 
         @if(signupForm.get('password')?.invalid && signupForm.get('password')?.dirty) {
-
         <div class="alert alert-danger mt-2 mb-0">
-
           <ul class="mb-0 ps-3">
-
             @if(signupForm.get('password')?.hasError('required')) {
-            <li>Password is required.</li>
+            <li>{{ 'auth.signup.passwordRequired' | transloco }}</li>
             }
-
             @if(signupForm.get('password')?.hasError('minlength')) {
-            <li>Password must be at least 6 characters.</li>
+            <li>{{ 'auth.signup.passwordMinlength' | transloco }}</li>
             }
-
             @if(signupForm.get('password')?.hasError('pattern')) {
-            <li>Password must contain at least one uppercase letter and one number.</li>
+            <li>{{ 'auth.signup.passwordPattern' | transloco }}</li>
             }
-
           </ul>
-
         </div>
-
         }
-
       </div>
 
       <!-- ================= Confirm Password ================= -->
       <div class="form-group">
-
-        <label for="rePassword">Confirm Password</label>
+        <label for="rePassword">{{ 'auth.signup.rePasswordLabel' | transloco }}</label>
 
         <div class="password-wrapper">
           <input id="rePassword" [type]="showRePassword() ? 'text' : 'password'" class="form-control"
-            placeholder="Confirm your password" formControlName="rePassword">
+            [placeholder]="'auth.signup.rePasswordPlaceholder' | transloco" formControlName="rePassword">
 
           <button type="button" class="eye-btn" (click)="showRePassword.set(!showRePassword())"
             aria-label="Toggle confirm password visibility">
@@ -138,41 +108,30 @@
         ||
         (signupForm.hasError('passwordsMismatch') && signupForm.get('rePassword')?.dirty)
         ) {
-
         <div class="alert alert-danger mt-2 mb-0">
-
           <ul class="mb-0 ps-3">
-
             @if(signupForm.get('rePassword')?.hasError('required')) {
-            <li>Please confirm your password.</li>
+            <li>{{ 'auth.signup.rePasswordRequired' | transloco }}</li>
             }
-
             @if(signupForm.hasError('passwordsMismatch')) {
-            <li>Passwords do not match.</li>
+            <li>{{ 'auth.signup.passwordsMismatch' | transloco }}</li>
             }
-
           </ul>
-
         </div>
-
         }
-
       </div>
 
       <!-- ================= Submit Button ================= -->
       <button class="btn btn-signup" type="submit" [disabled]="signupForm.invalid">
-
-        Create Account
-
+        {{ 'auth.signup.submitBtn' | transloco }}
       </button>
 
     </form>
 
     <p class="login-link">
-      Already have an account?
-      <a routerLink="/signin">Sign In</a>
+      {{ 'auth.signup.hasAccount' | transloco }}
+      <a routerLink="/signin">{{ 'auth.signup.signInLink' | transloco }}</a>
     </p>
 
   </div>
-
 </div>

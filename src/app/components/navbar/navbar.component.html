@@ -1,100 +1,116 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary py-3 sticky-top">
   <div class="container">
 
-    <!--  Logo  -->
-
+    <!-- Logo -->
     <a class="navbar-brand fw-bold text-main" routerLink="/home">
       Shoply
     </a>
 
-    <!--  Mobile Toggle Button -->
+    <!-- Mobile Toggle Button -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
       aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-
       <span class="navbar-toggler-icon"></span>
-
     </button>
 
-    <!--  Navbar  -->
+    <!-- Navbar Content -->
     <div class="collapse navbar-collapse" id="navbarContent">
 
-      <!--  Links  -->
-      <ul class="navbar-nav me-auto ms-lg-4">
+      <!-- Main Navigation Links -->
+      <ul class="navbar-nav align-items-lg-center gap-2 my-2 my-lg-0">
 
         <li class="nav-item">
           <a class="nav-link nav-main-link" routerLink="/home" routerLinkActive="navbar-active">
-            Home
+            {{ 'navbar.home' | transloco }}
           </a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link nav-main-link" routerLink="/products" routerLinkActive="navbar-active">
-            Products
+            {{ 'navbar.products' | transloco }}
           </a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link nav-main-link" routerLink="/categories" routerLinkActive="navbar-active">
-            Categories
+            {{ 'navbar.categories' | transloco }}
           </a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link nav-main-link" routerLink="/brands" routerLinkActive="navbar-active">
-            Brands
+            {{ 'navbar.brands' | transloco }}
           </a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link nav-main-link" routerLink="/allorders" routerLinkActive="navbar-active">
-            Orders
+            {{ 'navbar.orders' | transloco }}
           </a>
         </li>
 
       </ul>
 
-      <!-- User actions like wishlist, cart and login -->
-      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+      <!-- User Actions & Controls -->
+      <ul class="navbar-nav align-items-lg-center gap-2 nav-actions-wrapper">
 
         <!-- Wishlist -->
         <li class="nav-item">
           <a class="nav-link nav-action" routerLink="/wishlist" routerLinkActive="action-active">
-
             <i class="fa-regular fa-heart"></i>
-
-            <span>Wishlist</span>
-
-            <!-- Number of wishlist items -->
-            <!-- <span class="badge rounded-pill custom-badge">
-              0
-            </span> -->
-
+            <span>{{ 'navbar.wishlist' | transloco }}</span>
           </a>
         </li>
 
         <!-- Cart -->
         <li class="nav-item">
-          <a class="nav-link nav-action" routerLink="/cart">
-
+          <a class="nav-link nav-action nav-cart-link" routerLink="/cart">
             <i class="fa-solid fa-cart-shopping"></i>
+            <span>{{ 'navbar.cart' | transloco }}</span>
 
-            <span>Cart</span>
-
-            <!-- Number of cart items -->
             @if(cartCount() > 0){
               <span class="badge rounded-pill custom-badge">
                 {{ cartCount() }}
               </span>
             }
-
           </a>
         </li>
 
-        <!-- Login Button -->
-        <li class="nav-item ms-lg-2">
-          <a class="btn btn-login" (click)="logout()">
-            Logout
+        <!-- Language Dropdown Menu (Globe Icon Only) -->
+        <li class="nav-item dropdown ms-lg-1">
+          <a class="nav-link dropdown-toggle btn-lang-dropdown d-flex align-items-center justify-content-center" 
+             href="#" 
+             role="button" 
+             data-bs-toggle="dropdown" 
+             aria-expanded="false"
+             title="Language">
+            <i class="fa-solid fa-globe fs-5"></i>
           </a>
+
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+            <li>
+              <button class="dropdown-item d-flex align-items-center gap-2" 
+                      [class.active]="currentLang === 'ar'" 
+                      (click)="changeLanguage('ar')">
+                <span>🇪🇬</span>
+                <span>عربي</span>
+              </button>
+            </li>
+            <li>
+              <button class="dropdown-item d-flex align-items-center gap-2" 
+                      [class.active]="currentLang === 'en'" 
+                      (click)="changeLanguage('en')">
+                <span>🇬🇧</span>
+                <span>English</span>
+              </button>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Logout Button -->
+        <li class="nav-item ms-lg-1">
+          <button class="btn btn-login" (click)="logout()">
+            {{ 'navbar.logout' | transloco }}
+          </button>
         </li>
 
       </ul>

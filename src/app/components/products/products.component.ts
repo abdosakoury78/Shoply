@@ -1,33 +1,33 @@
-import { Component, computed, inject, OnInit, signal, Signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { ProductsService } from '../../Services/products.service';
 import { Product } from '../../Interfaces/products.interface';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../Services/cart.service';
 import Swal from 'sweetalert2';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { WishlistService } from '../../Services/wishlist.service';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslocoPipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
-   private readonly ProductsService = inject(ProductsService);
-   private readonly CartService = inject(CartService);
-   private readonly WishlistService = inject(WishlistService);
-   private readonly router = inject(Router);
+  private readonly productsService = inject(ProductsService);
+  private readonly cartService = inject(CartService);
+  private readonly wishlistService = inject(WishlistService);
+  private readonly router = inject(Router);
+  private readonly translocoService = inject(TranslocoService);
 
   allProducts = signal<Product[]>([]);
-
   currentPage = signal(1);
   pageSize = 8;
 
   products = computed(() => {
     const start = (this.currentPage() - 1) * this.pageSize;
     const end = start + this.pageSize;
-
     return this.allProducts().slice(start, end);
   });
 
@@ -40,68 +40,58 @@ export class ProductsComponent implements OnInit {
   );
 
   ngOnInit(): void {
-    this.ProductsService.getAllProducts().subscribe({
-      next: ({ data}) => {
-        this.allProducts.set(data)
-
+    this.productsService.getAllProducts().subscribe({
+      next: ({ data }) => {
+        this.allProducts.set(data);
       },
-      error: ({err}) =>{
+      error: (err) => {
         console.log(err);
       }
-
-    })
+    });
   }
 
-addToCart(productId: string){
-  this.CartService.updateCartCount(1, true);
-  this.CartService.addProductToCart(productId).subscribe({
+  addToCart(productId: string) {
+    this.cartService.updateCartCount(1, true);
+    this.cartService.addProductToCart(productId).subscribe({
+      next: (res) => {
+        console.log(res);
+        Swal.fire({
+          icon: 'success',
+          title: this.translocoService.translate('products.cartSuccess'),
+          timer: 1500,
+          showConfirmButton: false
+        });
+      },
+      error: (err) => {
+        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: err.error?.message || this.translocoService.translate('products.errorOccurred')
+        });
+      }
+    });
+  }
 
-    next: (res) => {
-
-      console.log(res);
-       Swal.fire({
-        icon: 'success',
-        title: 'Product Added To Cart',
-        timer: 1500,
-        showConfirmButton: false
-      });
-
-    },
-
-    error: (err) => {
-
-      console.log(err);
-       Swal.fire({
-        icon: 'error',
-        title: err.error.message
-      });
-
-    }
-
-  });
-
-}
-
-    addProductToWishlist(productId:string){
-    this.WishlistService.addProductToWishlist(productId).subscribe({
+  addProductToWishlist(productId: string) {
+    this.wishlistService.addProductToWishlist(productId).subscribe({
       next: () => {
         Swal.fire({
-        icon: 'success',
-        title: 'Product Added To Wishlist',
-        timer: 1500,
-        showConfirmButton: true
-      });
+          icon: 'success',
+          title: this.translocoService.translate('products.wishlistSuccess'),
+          timer: 1500,
+          showConfirmButton: true
+        });
       },
       error: (err) => {
         Swal.fire({
-        icon: 'error',
-        title: err.error.message
-      });        
+          icon: 'error',
+          title: err.error?.message || this.translocoService.translate('products.errorOccurred')
+        });
       }
-    })
+    });
   }
 
-   changePage(page: number) {
+  changePage(page: number) {
     if (page < 1 || page > this.totalPages()) return;
 
     this.currentPage.set(page);
@@ -115,5 +105,4 @@ addToCart(productId: string){
   goToProduct(productId: string) {
     this.router.navigate(['/products', productId]);
   }
-
 }

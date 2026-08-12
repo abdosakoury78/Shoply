@@ -2,11 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, TranslocoPipe],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -19,11 +20,12 @@ export class SignupComponent {
 
   signupForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
-
     email: new FormControl('', [Validators.required, Validators.email]),
-
-    password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/)]),
-
+    password: new FormControl('', [
+      Validators.required, 
+      Validators.minLength(6), 
+      Validators.pattern(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/)
+    ]),
     rePassword: new FormControl('', [Validators.required])
   }, { validators: this.passwordsMatch });
 
@@ -36,15 +38,13 @@ export class SignupComponent {
   onSubmit() {
     if (this.signupForm.invalid) return;
 
-
     this.authService.signup(this.signupForm.value).subscribe({
       next: (response) => {
         console.log(response);
         this.router.navigate(['/signin']);
       },
-
       error: (err) => {
-        this.errorMessage.set(err.error.message);
+        this.errorMessage.set(err.error?.message || 'An error occurred during signup');
         console.log(this.errorMessage);
       }
     });
