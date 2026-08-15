@@ -20,8 +20,11 @@
             class="wishlist-btn"
             [title]="'products.addToWishlist' | transloco"
             (click)="addProductToWishlist(product._id)">
-
-            <i class="fa-regular fa-heart"></i>
+            @if(product.favAdded) {
+              <i class="fa-solid fa-heart"></i>
+            }@else {
+              <i class="fa-regular fa-heart"></i>
+            }
 
           </button>
 

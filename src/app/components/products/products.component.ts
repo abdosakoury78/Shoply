@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { WishlistService } from '../../Services/wishlist.service';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
+import { WishlistResponse } from '../../Interfaces/wishlist.interface';
 
 @Component({
   selector: 'app-products',
@@ -24,6 +25,7 @@ export class ProductsComponent implements OnInit {
   allProducts = signal<Product[]>([]);
   currentPage = signal(1);
   pageSize = 8;
+  wishlist : Product[] | null = null;
 
   products = computed(() => {
     const start = (this.currentPage() - 1) * this.pageSize;
@@ -43,6 +45,20 @@ export class ProductsComponent implements OnInit {
     this.productsService.getAllProducts().subscribe({
       next: ({ data }) => {
         this.allProducts.set(data);
+        this.wishlistService.getWishlistProducts().subscribe({
+          next: (res) => {
+            this.wishlist = res.data;
+            for (let product of this.wishlist) {
+              this.allProducts.update(products =>
+                products.map(p =>
+                  p._id === product._id
+                    ? { ...p, favAdded: true }
+                    : p
+                )
+              );
+            }
+          }
+        })
       },
       error: (err) => {
         console.log(err);
@@ -73,22 +89,42 @@ export class ProductsComponent implements OnInit {
   }
 
   addProductToWishlist(productId: string) {
-    this.wishlistService.addProductToWishlist(productId).subscribe({
-      next: () => {
-        Swal.fire({
-          icon: 'success',
-          title: this.translocoService.translate('products.wishlistSuccess'),
-          timer: 1500,
-          showConfirmButton: true
-        });
-      },
-      error: (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: err.error?.message || this.translocoService.translate('products.errorOccurred')
-        });
-      }
-    });
+    const product = this.allProducts().filter(p => p._id === productId)[0];
+    if(!product.favAdded) {
+      this.wishlistService.addProductToWishlist(productId).subscribe({
+        next: () => {
+          this.allProducts.update(products =>
+            products.map(p =>
+              p._id === productId
+                ? { ...p, favAdded: true }
+                : p
+            )
+          );
+          Swal.fire({
+            icon: 'success',
+            title: this.translocoService.translate('products.wishlistSuccess'),
+            timer: 1500,
+            showConfirmButton: true
+          });
+          // this.wishlistIcon.set(true);
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: err.error?.message || this.translocoService.translate('products.errorOccurred')
+          });
+        }
+      });
+    }else {
+          this.allProducts.update(products =>
+            products.map(p =>
+              p._id === productId
+                ? { ...p, favAdded: false }
+                : p
+            )
+          );
+          this.wishlistService.removeProduct(productId).subscribe();
+    }
   }
 
   changePage(page: number) {

@@ -1,202 +1,441 @@
 <section class="container py-4">
+
   <!-- Header -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
+  <div class="d-flex justify-content-between align-items-center mb-4 checkout-header">
+
     <div>
-      <span class="text-uppercase fw-bold fs-7 tracking-wider d-block mb-1" style="color: #6c8a00; letter-spacing: 1px; font-size: 0.8rem;">
+      <span class="header-badge">
         {{ 'checkout.headerBadge' | transloco }}
       </span>
+
       <h2 class="h3 fw-bold mb-0 text-dark">
         {{ 'checkout.title' | transloco }}
       </h2>
     </div>
-    <a routerLink="/cart" class="fw-semibold text-decoration-none" style="color: #6c8a00;">
-      <i class="fa-solid fa-arrow-left me-1"></i> {{ 'checkout.backToCart' | transloco }}
+
+    <a
+      routerLink="/cart"
+      class="back-to-cart fw-semibold text-decoration-none">
+
+      <i class="fa-solid fa-arrow-left me-1"></i>
+
+      {{ 'checkout.backToCart' | transloco }}
+
     </a>
+
   </div>
 
+
   <div class="row g-4">
+
     <!-- Left Column: Shipping Form -->
     <div class="col-lg-7">
-      <form [formGroup]="checkOut" (ngSubmit)="submitForm()">
-        <div class="card border-0 shadow-sm p-4 bg-white" style="border-radius: 20px;">
+
+      <form
+        [formGroup]="checkOut"
+        (ngSubmit)="submitForm()">
+
+        <div class="checkout-card card border-0 shadow-sm p-4 bg-white">
+
           <h5 class="fw-bold mb-4 text-dark">
             {{ 'checkout.shippingAddress' | transloco }}
           </h5>
 
+
           <!-- Delivery Alert -->
-          <div class="alert border-0 rounded-3 d-flex align-items-center gap-2 mb-4" style="background-color: #eef4d8; color: #4a5e00;" role="alert">
+          <div
+            class="delivery-alert alert border-0 rounded-3 d-flex align-items-center gap-2 mb-4"
+            role="alert">
+
             <i class="fa-solid fa-circle-info fs-5"></i>
+
             <div>
-              <strong class="d-block">{{ 'checkout.deliveryInfo' | transloco }}</strong>
-              <small>{{ 'checkout.deliverySubinfo' | transloco }}</small>
+              <strong class="d-block">
+                {{ 'checkout.deliveryInfo' | transloco }}
+              </strong>
+
+              <small>
+                {{ 'checkout.deliverySubinfo' | transloco }}
+              </small>
             </div>
+
           </div>
+
 
           <!-- Form Group -->
           <div formGroupName="shippingAddress">
+
             <!-- City -->
-            <div class="mb-3">
-              <label for="city" class="form-label fw-semibold text-dark">
-                {{ 'checkout.city' | transloco }} <span class="text-danger">*</span>
+            <div class="mb-3 form-field">
+
+              <label
+                for="city"
+                class="form-label fw-semibold text-dark">
+
+                {{ 'checkout.city' | transloco }}
+
+                <span class="text-danger">*</span>
+
               </label>
+
               <div class="input-group">
-                <span class="input-group-text border-end-0" style="background-color: #f4f4f0; border-color: #e5e5e0;">
+
+                <span class="input-group-text">
                   <i class="fa-solid fa-building text-muted"></i>
                 </span>
-                <input 
-                  type="text" 
-                  formControlName="city" 
-                  id="city" 
-                  class="form-control border-start-0 py-2" 
-                  style="background-color: #f4f4f0; border-color: #e5e5e0;" 
+
+                <input
+                  type="text"
+                  formControlName="city"
+                  id="city"
+                  class="form-control"
                   [placeholder]="'checkout.cityPlaceholder' | transloco">
+
               </div>
-              @if (checkOut.get('shippingAddress.city')?.touched && checkOut.get('shippingAddress.city')?.errors?.['required']) {
-                <small class="text-danger mt-1 d-block">{{ 'checkout.errors.cityRequired' | transloco }}</small>
+
+              @if (
+                checkOut.get('shippingAddress.city')?.touched &&
+                checkOut.get('shippingAddress.city')?.errors?.['required']
+              ) {
+
+                <small class="text-danger mt-1 d-block">
+                  {{ 'checkout.errors.cityRequired' | transloco }}
+                </small>
+
               }
+
             </div>
+
 
             <!-- Street Address -->
-            <div class="mb-3">
-              <label for="details" class="form-label fw-semibold text-dark">
-                {{ 'checkout.streetAddress' | transloco }} <span class="text-danger">*</span>
+            <div class="mb-3 form-field">
+
+              <label
+                for="details"
+                class="form-label fw-semibold text-dark">
+
+                {{ 'checkout.streetAddress' | transloco }}
+
+                <span class="text-danger">*</span>
+
               </label>
+
               <div class="input-group">
-                <span class="input-group-text border-end-0" style="background-color: #f4f4f0; border-color: #e5e5e0;">
+
+                <span class="input-group-text">
                   <i class="fa-solid fa-location-dot text-muted"></i>
                 </span>
-                <textarea 
-                  formControlName="details" 
-                  id="details" 
-                  rows="3" 
-                  class="form-control border-start-0" 
-                  style="background-color: #f4f4f0; border-color: #e5e5e0;" 
-                  [placeholder]="'checkout.streetPlaceholder' | transloco"></textarea>
+
+                <textarea
+                  formControlName="details"
+                  id="details"
+                  rows="3"
+                  class="form-control"
+                  [placeholder]="'checkout.streetPlaceholder' | transloco">
+                </textarea>
+
               </div>
-              @if (checkOut.get('shippingAddress.details')?.touched && checkOut.get('shippingAddress.details')?.errors?.['required']) {
-                <small class="text-danger mt-1 d-block">{{ 'checkout.errors.streetRequired' | transloco }}</small>
+
+              @if (
+                checkOut.get('shippingAddress.details')?.touched &&
+                checkOut.get('shippingAddress.details')?.errors?.['required']
+              ) {
+
+                <small class="text-danger mt-1 d-block">
+                  {{ 'checkout.errors.streetRequired' | transloco }}
+                </small>
+
               }
+
             </div>
+
 
             <!-- Phone Number -->
-            <div class="mb-3">
-              <label for="phone" class="form-label fw-semibold text-dark">
-                {{ 'checkout.phone' | transloco }} <span class="text-danger">*</span>
+            <div class="mb-3 form-field">
+
+              <label
+                for="phone"
+                class="form-label fw-semibold text-dark">
+
+                {{ 'checkout.phone' | transloco }}
+
+                <span class="text-danger">*</span>
+
               </label>
+
               <div class="input-group">
-                <span class="input-group-text border-end-0" style="background-color: #f4f4f0; border-color: #e5e5e0;">
+
+                <span class="input-group-text">
                   <i class="fa-solid fa-phone text-muted"></i>
                 </span>
-                <input 
-                  type="tel" 
-                  formControlName="phone" 
-                  id="phone" 
-                  class="form-control border-start-0 py-2" 
-                  style="background-color: #f4f4f0; border-color: #e5e5e0;" 
+
+                <input
+                  type="tel"
+                  formControlName="phone"
+                  id="phone"
+                  class="form-control"
                   [placeholder]="'checkout.phonePlaceholder' | transloco">
+
               </div>
+
               @if (checkOut.get('shippingAddress.phone')?.touched) {
-                @if (checkOut.get('shippingAddress.phone')?.errors?.['required']) {
-                  <small class="text-danger mt-1 d-block">{{ 'checkout.errors.phoneRequired' | transloco }}</small>
-                } @else if (checkOut.get('shippingAddress.phone')?.errors?.['pattern']) {
-                  <small class="text-danger mt-1 d-block">{{ 'checkout.errors.phonePattern' | transloco }}</small>
+
+                @if (
+                  checkOut.get('shippingAddress.phone')?.errors?.['required']
+                ) {
+
+                  <small class="text-danger mt-1 d-block">
+                    {{ 'checkout.errors.phoneRequired' | transloco }}
+                  </small>
+
+                } @else if (
+                  checkOut.get('shippingAddress.phone')?.errors?.['pattern']
+                ) {
+
+                  <small class="text-danger mt-1 d-block">
+                    {{ 'checkout.errors.phonePattern' | transloco }}
+                  </small>
+
                 }
+
               }
+
             </div>
+
           </div>
 
+
           <!-- Payment Method -->
-          <div class="mt-4 pt-3 border-top">
+          <div class="payment-section mt-4 pt-3 border-top">
+
             <label class="form-label fw-semibold text-dark mb-3">
               {{ 'checkout.paymentMethod' | transloco }}
             </label>
+
             <div class="d-flex gap-4 mb-4">
-              <div class="form-check">
-                <input class="form-check-input custom-radio" type="radio" name="paymentType" id="cash" value="cash" checked (change)="changeFlag($any($event.target))">
-                <label class="form-check-label fw-medium text-dark" for="cash">
-                  <i class="fa-solid fa-money-bill-wave me-1" style="color: #6c8a00;"></i> {{ 'checkout.cashOnDelivery' | transloco }}
+
+              <div class="form-check payment-option">
+
+                <input
+                  class="form-check-input custom-radio"
+                  type="radio"
+                  name="paymentType"
+                  id="cash"
+                  value="cash"
+                  checked
+                  (change)="changeFlag($any($event.target))">
+
+                <label
+                  class="form-check-label fw-medium text-dark"
+                  for="cash">
+
+                  <i class="fa-solid fa-money-bill-wave me-1"></i>
+
+                  {{ 'checkout.cashOnDelivery' | transloco }}
+
                 </label>
+
               </div>
-              <div class="form-check">
-                <input class="form-check-input custom-radio" type="radio" name="paymentType" id="online" value="online" (change)="changeFlag($any($event.target))">
-                <label class="form-check-label fw-medium text-dark" for="online">
-                  <i class="fa-regular fa-credit-card me-1 text-primary"></i> {{ 'checkout.onlinePayment' | transloco }}
+
+
+              <div class="form-check payment-option">
+
+                <input
+                  class="form-check-input custom-radio"
+                  type="radio"
+                  name="paymentType"
+                  id="online"
+                  value="online"
+                  (change)="changeFlag($any($event.target))">
+
+                <label
+                  class="form-check-label fw-medium text-dark"
+                  for="online">
+
+                  <i class="fa-regular fa-credit-card me-1 text-primary"></i>
+
+                  {{ 'checkout.onlinePayment' | transloco }}
+
                 </label>
+
               </div>
+
             </div>
+
           </div>
 
+
           <!-- Submit Button -->
-          <button [disabled]="isLoading()" type="submit" class="btn text-white w-100 py-3 fw-bold border-0 shadow-sm" style="background-color: #6c8a00; border-radius: 50px; font-size: 1.05rem;">
+          <button
+            [disabled]="isLoading()"
+            type="submit"
+            class="checkout-submit btn text-white w-100 py-3 fw-bold border-0 shadow-sm">
+
             @if (isLoading()) {
-              <i class="fa-solid fa-spinner fa-spin me-2"></i> {{ 'checkout.processing' | transloco }}
+
+              <i class="fa-solid fa-spinner fa-spin me-2"></i>
+
+              {{ 'checkout.processing' | transloco }}
+
             } @else {
+
               @if (flag() === 'cash') {
-                {{ 'checkout.completeCashOrder' | transloco }} <i class="fa-solid fa-arrow-right ms-2"></i>
+
+                {{ 'checkout.completeCashOrder' | transloco }}
+
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+
               } @else {
-                {{ 'checkout.proceedToOnlinePayment' | transloco }} <i class="fa-solid fa-arrow-right ms-2"></i>
+
+                {{ 'checkout.proceedToOnlinePayment' | transloco }}
+
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+
               }
+
             }
+
           </button>
+
         </div>
+
       </form>
+
     </div>
+
 
     <!-- Right Column: Order Summary -->
     <div class="col-lg-5">
+
       @if (cartDetails().data) {
-        <div class="card border-0 shadow-sm p-4 bg-white" style="border-radius: 20px;">
-          <span class="text-uppercase fw-bold mb-1" style="color: #6c8a00; font-size: 0.75rem; letter-spacing: 1px;">
+
+        <div class="summary-card card border-0 shadow-sm p-4 bg-white">
+
+          <span class="summary-badge">
             {{ 'checkout.summary.badge' | transloco }}
           </span>
+
           <h3 class="h4 fw-bold mb-4 text-dark">
             {{ 'checkout.summary.title' | transloco }}
           </h3>
 
+
           <!-- Products Scroll -->
-          <div class="custom-scroll mb-3 pe-1" style="max-height: 220px; overflow-y: auto;">
-            @for (item of cartDetails().data.products; track item._id) {
-              <div class="d-flex align-items-center justify-content-between py-2 border-bottom border-light">
+          <div class="custom-scroll mb-3 pe-1">
+
+            @for (
+              item of cartDetails().data.products;
+              track item._id
+            ) {
+
+              <div class="summary-product d-flex align-items-center justify-content-between py-2 border-bottom border-light">
+
                 <div class="d-flex align-items-center gap-3">
-                  <img [src]="item.product.imageCover" [alt]="item.product.title" class="rounded-3" style="width: 50px; height: 50px; object-fit: cover;">
+
+                  <img
+                    [src]="item.product.imageCover"
+                    [alt]="item.product.title"
+                    class="product-image">
+
                   <div>
-                    <h6 class="mb-0 text-truncate fw-semibold text-dark" style="max-width: 140px;">{{ item.product.title }}</h6>
-                    <small class="text-muted">{{ 'checkout.summary.qty' | transloco }}: {{ item.count }}</small>
+
+                    <h6 class="mb-0 text-truncate fw-semibold text-dark product-name">
+                      {{ item.product.title }}
+                    </h6>
+
+                    <small class="text-muted">
+                      {{ 'checkout.summary.qty' | transloco }}:
+                      {{ item.count }}
+                    </small>
+
                   </div>
+
                 </div>
-                <span class="fw-bold" style="color: #6c8a00;">{{ item.price * item.count }} {{ 'checkout.currency' | transloco }}</span>
+
+                <span class="product-price fw-bold">
+                  {{ item.price * item.count }}
+                  {{ 'checkout.currency' | transloco }}
+                </span>
+
               </div>
+
             }
+
           </div>
+
 
           <!-- Price Breakdowns -->
-          <div class="d-flex justify-content-between my-2 text-secondary">
-            <span>{{ 'checkout.summary.subtotal' | transloco }}</span>
-            <span class="fw-bold text-dark">{{ cartDetails().data.totalCartPrice }} {{ 'checkout.currency' | transloco }}</span>
-          </div>
-          <div class="d-flex justify-content-between mb-2 text-secondary">
-            <span>{{ 'checkout.summary.shipping' | transloco }}</span>
-            <span class="fw-bold" style="color: #6c8a00;">{{ 'checkout.summary.free' | transloco }}</span>
-          </div>
-          <div class="d-flex justify-content-between mb-3 text-secondary">
-            <span>{{ 'checkout.summary.tax' | transloco }}</span>
-            <small class="text-muted">{{ 'checkout.summary.atCheckout' | transloco }}</small>
+          <div class="price-row">
+            <span>
+              {{ 'checkout.summary.subtotal' | transloco }}
+            </span>
+
+            <span class="fw-bold text-dark">
+              {{ cartDetails().data.totalCartPrice }}
+              {{ 'checkout.currency' | transloco }}
+            </span>
           </div>
 
-          <hr class="my-3 text-muted opacity-25">
+
+          <div class="price-row">
+            <span>
+              {{ 'checkout.summary.shipping' | transloco }}
+            </span>
+
+            <span class="fw-bold">
+              {{ 'checkout.summary.free' | transloco }}
+            </span>
+          </div>
+
+
+          <div class="price-row mb-3">
+            <span>
+              {{ 'checkout.summary.tax' | transloco }}
+            </span>
+
+            <small class="text-muted">
+              {{ 'checkout.summary.atCheckout' | transloco }}
+            </small>
+          </div>
+
+
+          <hr class="my-3">
+
 
           <!-- Total -->
-          <div class="d-flex justify-content-between align-items-baseline mb-1">
-            <span class="h5 fw-bold mb-0 text-dark">{{ 'checkout.summary.total' | transloco }}</span>
-            <span class="h3 fw-bold mb-0" style="color: #6c8a00;">{{ cartDetails().data.totalCartPrice }} {{ 'checkout.currency' | transloco }}</span>
-          </div>
-          <small class="text-muted d-block mb-4">{{ 'checkout.summary.vat' | transloco }}</small>
+          <div class="total-row d-flex justify-content-between align-items-baseline mb-1">
 
-          <div class="text-center text-muted" style="font-size: 0.8rem;">
-            <i class="fa-solid fa-shield-halved me-1" style="color: #6c8a00;"></i> {{ 'checkout.summary.secureCheckout' | transloco }}
+            <span class="h5 fw-bold mb-0 text-dark">
+              {{ 'checkout.summary.total' | transloco }}
+            </span>
+
+            <span class="total-price h3 fw-bold mb-0">
+              {{ cartDetails().data.totalCartPrice }}
+              {{ 'checkout.currency' | transloco }}
+            </span>
+
           </div>
+
+
+          <small class="text-muted d-block mb-4">
+            {{ 'checkout.summary.vat' | transloco }}
+          </small>
+
+
+          <div class="secure-checkout text-center text-muted">
+
+            <i class="fa-solid fa-shield-halved me-1"></i>
+
+            {{ 'checkout.summary.secureCheckout' | transloco }}
+
+          </div>
+
         </div>
+
       }
+
     </div>
+
   </div>
+
 </section>

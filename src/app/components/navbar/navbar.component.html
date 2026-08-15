@@ -58,6 +58,11 @@
           <a class="nav-link nav-action" routerLink="/wishlist" routerLinkActive="action-active">
             <i class="fa-regular fa-heart"></i>
             <span>{{ 'navbar.wishlist' | transloco }}</span>
+            @if(wishListCount() > 0){
+              <span class="badge rounded-circle wishlist custom-badge">
+                {{ wishListCount() }}
+              </span>
+            }
           </a>
         </li>
 
@@ -68,7 +73,7 @@
             <span>{{ 'navbar.cart' | transloco }}</span>
 
             @if(cartCount() > 0){
-              <span class="badge rounded-pill custom-badge">
+              <span class="badge rounded-circle custom-badge">
                 {{ cartCount() }}
               </span>
             }
@@ -77,10 +82,10 @@
 
         <!-- Language Dropdown Menu (Globe Icon Only) -->
         <li class="nav-item dropdown ms-lg-1">
-          <a class="nav-link dropdown-toggle btn-lang-dropdown d-flex align-items-center justify-content-center" 
-             href="#" 
-             role="button" 
-             data-bs-toggle="dropdown" 
+          <a class="nav-link dropdown-toggle btn-lang-dropdown d-flex align-items-center justify-content-center"
+             href="#"
+             role="button"
+             data-bs-toggle="dropdown"
              aria-expanded="false"
              title="Language">
             <i class="fa-solid fa-globe fs-5"></i>
@@ -88,16 +93,16 @@
 
           <ul class="dropdown-menu dropdown-menu-end shadow-sm">
             <li>
-              <button class="dropdown-item d-flex align-items-center gap-2" 
-                      [class.active]="currentLang === 'ar'" 
+              <button class="dropdown-item d-flex align-items-center gap-2"
+                      [class.active]="currentLang === 'ar'"
                       (click)="changeLanguage('ar')">
                 <span>🇪🇬</span>
                 <span>عربي</span>
               </button>
             </li>
             <li>
-              <button class="dropdown-item d-flex align-items-center gap-2" 
-                      [class.active]="currentLang === 'en'" 
+              <button class="dropdown-item d-flex align-items-center gap-2"
+                      [class.active]="currentLang === 'en'"
                       (click)="changeLanguage('en')">
                 <span>🇬🇧</span>
                 <span>English</span>

@@ -24,6 +24,7 @@ export interface Product {
     createdAt: string;
     updatedAt: string;
     id: string;
+    favAdded?: boolean;
 }
 
 
