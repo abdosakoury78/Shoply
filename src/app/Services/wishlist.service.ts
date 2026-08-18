@@ -22,19 +22,21 @@ export class WishlistService {
         });
     }
 
+    updateWishListCount(isAdd : boolean) {
+        const value = this.subject.value;
+        if(isAdd) this.subject.next(value + 1);
+        else this.subject.next(value - 1);
+    }
+
     getWishlistProducts():Observable<WishlistResponse>{
         return this.http.get<WishlistResponse>(`${this.apiUrl}/wishlist`);
     }
 
     addProductToWishlist(productId:string){
-        const value = this.subject.value;
-        this.subject.next(value + 1);
         return this.http.post(`${this.apiUrl}/wishlist`,{productId});
     }
 
     removeProduct(productId:string):Observable<RemoveWishlistResponse>{
-        const value = this.subject.value;
-        this.subject.next(value - 1);
         return this.http.delete<RemoveWishlistResponse>(`${this.apiUrl}/wishlist/${productId}`);
     }
 }

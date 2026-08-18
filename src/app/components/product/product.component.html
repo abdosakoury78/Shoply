@@ -1,4 +1,4 @@
-@if (product) {
+@if (product(); as product) {
 
   <div class="container py-5">
 
@@ -13,7 +13,6 @@
 
     <div class="row align-items-center g-5">
 
-      <!-- Product Image -->
       <div class="col-lg-5">
 
         <div class="product-image">
@@ -23,12 +22,16 @@
             [alt]="product.title"
             class="img-fluid">
 
-          <!-- Wishlist Button -->
           <button
             class="wishlist-btn"
-            [title]="'productDetails.addToWishlist' | transloco">
+            [title]="'productDetails.addToWishlist' | transloco"
+            (click)="addProductToWishlist()">
 
-            <i class="fa-regular fa-heart"></i>
+            @if(product.favAdded) {
+              <i class="fa-solid fa-heart"></i>
+            }@else {
+              <i class="fa-regular fa-heart"></i>
+            }
 
           </button>
 
@@ -36,7 +39,7 @@
 
       </div>
 
-      <!-- Product Details -->
+
       <div class="col-lg-7">
 
         <span class="product-category">
@@ -55,7 +58,7 @@
 
           <div class="price">
 
-            {{ product.price  | currency:'EGP' }}
+            {{ product.price | currency:'EGP' }}
 
           </div>
 
@@ -66,7 +69,8 @@
             {{ product.ratingsAverage }}
 
             <small>
-              ({{ product.ratingsQuantity }} {{ 'productDetails.reviews' | transloco }})
+              ({{ product.ratingsQuantity }}
+              {{ 'productDetails.reviews' | transloco }})
             </small>
 
           </div>
@@ -77,31 +81,31 @@
 
           <i class="fa-solid fa-box-open"></i>
 
-          {{ product.quantity }} {{ 'productDetails.inStock' | transloco }}
+          {{ product.quantity }}
+          {{ 'productDetails.inStock' | transloco }}
 
         </div>
 
-        <!-- Quantity -->
 
         <div class="quantity mt-4">
 
           <button
             class="qty-btn"
             (click)="decreaseQuantity()"
-            [disabled]="quantity === 1">
+            [disabled]="quantity() === 1">
 
             <i class="fa-solid fa-minus"></i>
 
           </button>
 
           <span>
-            {{ quantity }}
+            {{ quantity() }}
           </span>
 
           <button
             class="qty-btn"
             (click)="increaseQuantity()"
-            [disabled]="quantity >= product.quantity">
+            [disabled]="quantity() >= product.quantity">
 
             <i class="fa-solid fa-plus"></i>
 
@@ -109,13 +113,12 @@
 
         </div>
 
-        <!-- Add To Cart -->
 
         <div class="action-buttons mt-4">
 
           <button
             class="btn btn-cart"
-            (click)="addToCart(quantity)">
+            (click)="addToCart(quantity())">
 
             <i class="fa-solid fa-cart-shopping me-2"></i>
 
@@ -135,7 +138,7 @@
 
 @else {
 
-  <div class="d-flex justify-content-center align-items-center py-5">
+  <div class="loading">
 
     <div class="spinner-border text-success"></div>
 

@@ -23,6 +23,7 @@ export class CartComponent implements OnInit {
     this._CartService.getCartProducts().subscribe({
       next: ({ data }) => {
         this.cartItems.set(data);
+        console.log(data);
         this.cartId.set(data?._id || null);
       },
       error: (err) => {

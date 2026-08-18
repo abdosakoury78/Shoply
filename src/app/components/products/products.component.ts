@@ -100,6 +100,7 @@ export class ProductsComponent implements OnInit {
                 : p
             )
           );
+          this.wishlistService.updateWishListCount(true);
           Swal.fire({
             icon: 'success',
             title: this.translocoService.translate('products.wishlistSuccess'),
@@ -124,6 +125,7 @@ export class ProductsComponent implements OnInit {
             )
           );
           this.wishlistService.removeProduct(productId).subscribe();
+          this.wishlistService.updateWishListCount(false);
     }
   }
 
